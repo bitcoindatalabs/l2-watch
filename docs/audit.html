@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Network Audit Dashboard - Audit Trail</title>
+    <!-- Bitcoin Data Labs styles -->
+    <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body class="has-fixed-header">
+    <!-- Bitcoin Data Labs Header -->
+    <div id="header"></div>
+    <div class="main-content container">
+
+
+        <style>
+            .data-table { width: 100%; border-collapse: collapse; color: var(--text-secondary); font-size: 0.9rem; }
+            .data-table th { text-align: left; padding: 0.75rem; border-bottom: 1px solid var(--border-color); color: var(--text-primary); }
+            .data-table td { padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-family: monospace; }
+        </style>
+
+        <main>
+                <div class="charts-grid">
+                    <div class="chart-container" style="grid-column: 1 / -1;">
+                        <div class="chart-header">
+                            <h2 class="chart-title">Known Federation Addresses</h2>
+                            <div class="chart-subtitle">Mainchain addresses belonging to the Liquid Federation</div>
+                        </div>
+                        <div style="overflow-x: auto; padding: 1rem;">
+                            <table class="data-table" id="table-fed-addresses">
+                                <thead>
+                                    <tr><th>Bitcoin Address</th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container" style="grid-column: 1 / -1;">
+                        <div class="chart-header">
+                            <h2 class="chart-title">Recent Verified Peg-ins</h2>
+                        </div>
+                        <div style="overflow-x: auto; padding: 1rem;">
+                            <table class="data-table" id="table-recent-pegins">
+                                <thead>
+                                    <tr><th>Amount (BTC)</th><th>Bitcoin TXID</th><th>Liquid TXID</th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="chart-container" style="grid-column: 1 / -1;">
+                        <div class="chart-header">
+                            <h2 class="chart-title">Recent Verified Peg-outs</h2>
+                        </div>
+                        <div style="overflow-x: auto; padding: 1rem;">
+                            <table class="data-table" id="table-recent-pegouts">
+                                <thead>
+                                    <tr><th>Amount (BTC)</th><th>Destination Address</th><th>Liquid TXID</th><th>Bitcoin TXID</th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </main>
+
+        <div class="dashboard-footer">
+            <p>Data provided by local Liquid Elements node & Bitcoin Core verification. Data is updated daily.</p>
+        </div>
+    </div>
+
+    <!-- Bitcoin Data Labs Footer -->
+    <div id="footer"></div>
+
+    <!-- Bitcoin Data Labs App Components -->
+    <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+    <!-- App Configuration -->
+    <script src="js/app-config.js"></script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

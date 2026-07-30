@@ -1,0 +1,770 @@
+[
+    {
+        "month": "2011-02",
+        "tx_count": 1,
+        "ct_count": 0,
+        "ct_rate": 0.0,
+        "total_fees_lbtc": 0.0,
+        "total_vsize": 130
+    },
+    {
+        "month": "2018-09",
+        "tx_count": 4373,
+        "ct_count": 5,
+        "ct_rate": 0.11,
+        "total_fees_lbtc": 0.00015166,
+        "total_vsize": 866300
+    },
+    {
+        "month": "2018-10",
+        "tx_count": 34781,
+        "ct_count": 6,
+        "ct_rate": 0.02,
+        "total_fees_lbtc": 0.00014336,
+        "total_vsize": 6801110
+    },
+    {
+        "month": "2018-11",
+        "tx_count": 39705,
+        "ct_count": 2825,
+        "ct_rate": 7.11,
+        "total_fees_lbtc": 0.06295129,
+        "total_vsize": 13219075
+    },
+    {
+        "month": "2018-12",
+        "tx_count": 43466,
+        "ct_count": 507,
+        "ct_rate": 1.17,
+        "total_fees_lbtc": 0.01081753,
+        "total_vsize": 9504259
+    },
+    {
+        "month": "2019-01",
+        "tx_count": 42639,
+        "ct_count": 22,
+        "ct_rate": 0.05,
+        "total_fees_lbtc": 0.00066636,
+        "total_vsize": 8415647
+    },
+    {
+        "month": "2019-02",
+        "tx_count": 37790,
+        "ct_count": 2147,
+        "ct_rate": 5.68,
+        "total_fees_lbtc": 0.04626879,
+        "total_vsize": 11609548
+    },
+    {
+        "month": "2019-03",
+        "tx_count": 73191,
+        "ct_count": 29402,
+        "ct_rate": 40.17,
+        "total_fees_lbtc": 0.67485649,
+        "total_vsize": 76337173
+    },
+    {
+        "month": "2019-04",
+        "tx_count": 64216,
+        "ct_count": 21866,
+        "ct_rate": 34.05,
+        "total_fees_lbtc": 0.52528787,
+        "total_vsize": 60920098
+    },
+    {
+        "month": "2019-05",
+        "tx_count": 64271,
+        "ct_count": 20812,
+        "ct_rate": 32.38,
+        "total_fees_lbtc": 0.55485655,
+        "total_vsize": 64063072
+    },
+    {
+        "month": "2019-06",
+        "tx_count": 62208,
+        "ct_count": 19324,
+        "ct_rate": 31.06,
+        "total_fees_lbtc": 0.4418378,
+        "total_vsize": 52698016
+    },
+    {
+        "month": "2019-07",
+        "tx_count": 64938,
+        "ct_count": 20369,
+        "ct_rate": 31.37,
+        "total_fees_lbtc": 0.50748612,
+        "total_vsize": 59613645
+    },
+    {
+        "month": "2019-08",
+        "tx_count": 59582,
+        "ct_count": 20504,
+        "ct_rate": 34.41,
+        "total_fees_lbtc": 0.47669734,
+        "total_vsize": 55542795
+    },
+    {
+        "month": "2019-09",
+        "tx_count": 62338,
+        "ct_count": 21725,
+        "ct_rate": 34.85,
+        "total_fees_lbtc": 0.50595057,
+        "total_vsize": 58795180
+    },
+    {
+        "month": "2019-10",
+        "tx_count": 69698,
+        "ct_count": 25336,
+        "ct_rate": 36.35,
+        "total_fees_lbtc": 1.58123111,
+        "total_vsize": 67009729
+    },
+    {
+        "month": "2019-11",
+        "tx_count": 71249,
+        "ct_count": 28117,
+        "ct_rate": 39.46,
+        "total_fees_lbtc": 0.62870139,
+        "total_vsize": 70622465
+    },
+    {
+        "month": "2019-12",
+        "tx_count": 87024,
+        "ct_count": 43026,
+        "ct_rate": 49.44,
+        "total_fees_lbtc": 0.93175859,
+        "total_vsize": 102089608
+    },
+    {
+        "month": "2020-01",
+        "tx_count": 91239,
+        "ct_count": 47924,
+        "ct_rate": 52.53,
+        "total_fees_lbtc": 1.03505157,
+        "total_vsize": 112253182
+    },
+    {
+        "month": "2020-02",
+        "tx_count": 81280,
+        "ct_count": 40376,
+        "ct_rate": 49.68,
+        "total_fees_lbtc": 0.87420439,
+        "total_vsize": 95586256
+    },
+    {
+        "month": "2020-03",
+        "tx_count": 77198,
+        "ct_count": 33733,
+        "ct_rate": 43.7,
+        "total_fees_lbtc": 1.14231507,
+        "total_vsize": 85391003
+    },
+    {
+        "month": "2020-04",
+        "tx_count": 84370,
+        "ct_count": 41847,
+        "ct_rate": 49.6,
+        "total_fees_lbtc": 0.20213688,
+        "total_vsize": 118136918
+    },
+    {
+        "month": "2020-05",
+        "tx_count": 93622,
+        "ct_count": 50232,
+        "ct_rate": 53.65,
+        "total_fees_lbtc": 0.16047366,
+        "total_vsize": 147801174
+    },
+    {
+        "month": "2020-06",
+        "tx_count": 87723,
+        "ct_count": 44852,
+        "ct_rate": 51.13,
+        "total_fees_lbtc": 0.15504849,
+        "total_vsize": 148534754
+    },
+    {
+        "month": "2020-07",
+        "tx_count": 79839,
+        "ct_count": 36678,
+        "ct_rate": 45.94,
+        "total_fees_lbtc": 0.13069022,
+        "total_vsize": 122256308
+    },
+    {
+        "month": "2020-08",
+        "tx_count": 71649,
+        "ct_count": 27401,
+        "ct_rate": 38.24,
+        "total_fees_lbtc": 0.08556681,
+        "total_vsize": 82299141
+    },
+    {
+        "month": "2020-09",
+        "tx_count": 69084,
+        "ct_count": 26299,
+        "ct_rate": 38.07,
+        "total_fees_lbtc": 0.07751696,
+        "total_vsize": 79150824
+    },
+    {
+        "month": "2020-10",
+        "tx_count": 71206,
+        "ct_count": 26752,
+        "ct_rate": 37.57,
+        "total_fees_lbtc": 0.07871219,
+        "total_vsize": 82708299
+    },
+    {
+        "month": "2020-11",
+        "tx_count": 66804,
+        "ct_count": 25876,
+        "ct_rate": 38.73,
+        "total_fees_lbtc": 0.08138815,
+        "total_vsize": 81330780
+    },
+    {
+        "month": "2020-12",
+        "tx_count": 65996,
+        "ct_count": 25506,
+        "ct_rate": 38.65,
+        "total_fees_lbtc": 0.08003936,
+        "total_vsize": 77811946
+    },
+    {
+        "month": "2021-01",
+        "tx_count": 55797,
+        "ct_count": 16665,
+        "ct_rate": 29.87,
+        "total_fees_lbtc": 0.07147983,
+        "total_vsize": 54401702
+    },
+    {
+        "month": "2021-02",
+        "tx_count": 53905,
+        "ct_count": 16313,
+        "ct_rate": 30.26,
+        "total_fees_lbtc": 0.05217955,
+        "total_vsize": 51866170
+    },
+    {
+        "month": "2021-03",
+        "tx_count": 63390,
+        "ct_count": 19577,
+        "ct_rate": 30.88,
+        "total_fees_lbtc": 0.06446528,
+        "total_vsize": 62504005
+    },
+    {
+        "month": "2021-04",
+        "tx_count": 60664,
+        "ct_count": 18996,
+        "ct_rate": 31.31,
+        "total_fees_lbtc": 0.06114865,
+        "total_vsize": 59816413
+    },
+    {
+        "month": "2021-05",
+        "tx_count": 65677,
+        "ct_count": 21640,
+        "ct_rate": 32.95,
+        "total_fees_lbtc": 0.07535211,
+        "total_vsize": 67307157
+    },
+    {
+        "month": "2021-06",
+        "tx_count": 59486,
+        "ct_count": 16266,
+        "ct_rate": 27.34,
+        "total_fees_lbtc": 0.05348583,
+        "total_vsize": 53747405
+    },
+    {
+        "month": "2021-07",
+        "tx_count": 58990,
+        "ct_count": 16484,
+        "ct_rate": 27.94,
+        "total_fees_lbtc": 0.0658158,
+        "total_vsize": 52977967
+    },
+    {
+        "month": "2021-08",
+        "tx_count": 67209,
+        "ct_count": 22261,
+        "ct_rate": 33.12,
+        "total_fees_lbtc": 0.0804753,
+        "total_vsize": 64520634
+    },
+    {
+        "month": "2021-09",
+        "tx_count": 67874,
+        "ct_count": 23621,
+        "ct_rate": 34.8,
+        "total_fees_lbtc": 0.11601156,
+        "total_vsize": 70455543
+    },
+    {
+        "month": "2021-10",
+        "tx_count": 65430,
+        "ct_count": 20477,
+        "ct_rate": 31.3,
+        "total_fees_lbtc": 0.05835657,
+        "total_vsize": 67924333
+    },
+    {
+        "month": "2021-11",
+        "tx_count": 90047,
+        "ct_count": 22480,
+        "ct_rate": 24.96,
+        "total_fees_lbtc": 0.0773835,
+        "total_vsize": 80050704
+    },
+    {
+        "month": "2021-12",
+        "tx_count": 66853,
+        "ct_count": 18069,
+        "ct_rate": 27.03,
+        "total_fees_lbtc": 0.12546055,
+        "total_vsize": 56441874
+    },
+    {
+        "month": "2022-01",
+        "tx_count": 63406,
+        "ct_count": 16914,
+        "ct_rate": 26.68,
+        "total_fees_lbtc": 0.05286521,
+        "total_vsize": 55596346
+    },
+    {
+        "month": "2022-02",
+        "tx_count": 56548,
+        "ct_count": 14958,
+        "ct_rate": 26.45,
+        "total_fees_lbtc": 0.0458936,
+        "total_vsize": 47646134
+    },
+    {
+        "month": "2022-03",
+        "tx_count": 102839,
+        "ct_count": 46050,
+        "ct_rate": 44.78,
+        "total_fees_lbtc": 0.17027238,
+        "total_vsize": 124802379
+    },
+    {
+        "month": "2022-04",
+        "tx_count": 84805,
+        "ct_count": 37815,
+        "ct_rate": 44.59,
+        "total_fees_lbtc": 0.14143329,
+        "total_vsize": 106977595
+    },
+    {
+        "month": "2022-05",
+        "tx_count": 78190,
+        "ct_count": 32303,
+        "ct_rate": 41.31,
+        "total_fees_lbtc": 0.1032144,
+        "total_vsize": 94266983
+    },
+    {
+        "month": "2022-06",
+        "tx_count": 81427,
+        "ct_count": 37287,
+        "ct_rate": 45.79,
+        "total_fees_lbtc": 0.10650515,
+        "total_vsize": 109354804
+    },
+    {
+        "month": "2022-07",
+        "tx_count": 88978,
+        "ct_count": 43862,
+        "ct_rate": 49.3,
+        "total_fees_lbtc": 0.12083417,
+        "total_vsize": 129516103
+    },
+    {
+        "month": "2022-08",
+        "tx_count": 81280,
+        "ct_count": 36194,
+        "ct_rate": 44.53,
+        "total_fees_lbtc": 0.09937157,
+        "total_vsize": 111090345
+    },
+    {
+        "month": "2022-09",
+        "tx_count": 70713,
+        "ct_count": 28810,
+        "ct_rate": 40.74,
+        "total_fees_lbtc": 0.07902064,
+        "total_vsize": 89883551
+    },
+    {
+        "month": "2022-10",
+        "tx_count": 72387,
+        "ct_count": 27280,
+        "ct_rate": 37.69,
+        "total_fees_lbtc": 0.07518392,
+        "total_vsize": 86566207
+    },
+    {
+        "month": "2022-11",
+        "tx_count": 59339,
+        "ct_count": 14207,
+        "ct_rate": 23.94,
+        "total_fees_lbtc": 0.04536833,
+        "total_vsize": 50456646
+    },
+    {
+        "month": "2022-12",
+        "tx_count": 51422,
+        "ct_count": 5963,
+        "ct_rate": 11.6,
+        "total_fees_lbtc": 0.01960209,
+        "total_vsize": 29813481
+    },
+    {
+        "month": "2023-01",
+        "tx_count": 48163,
+        "ct_count": 2869,
+        "ct_rate": 5.96,
+        "total_fees_lbtc": 0.01439367,
+        "total_vsize": 21763691
+    },
+    {
+        "month": "2023-02",
+        "tx_count": 42831,
+        "ct_count": 2409,
+        "ct_rate": 5.62,
+        "total_fees_lbtc": 0.01549364,
+        "total_vsize": 21825869
+    },
+    {
+        "month": "2023-03",
+        "tx_count": 49472,
+        "ct_count": 3282,
+        "ct_rate": 6.63,
+        "total_fees_lbtc": 0.01677058,
+        "total_vsize": 24757708
+    },
+    {
+        "month": "2023-04",
+        "tx_count": 46670,
+        "ct_count": 4009,
+        "ct_rate": 8.59,
+        "total_fees_lbtc": 0.0146769,
+        "total_vsize": 23977412
+    },
+    {
+        "month": "2023-05",
+        "tx_count": 80028,
+        "ct_count": 34842,
+        "ct_rate": 43.54,
+        "total_fees_lbtc": 0.22139454,
+        "total_vsize": 225572745
+    },
+    {
+        "month": "2023-06",
+        "tx_count": 87673,
+        "ct_count": 45305,
+        "ct_rate": 51.67,
+        "total_fees_lbtc": 0.12802494,
+        "total_vsize": 133393123
+    },
+    {
+        "month": "2023-07",
+        "tx_count": 61665,
+        "ct_count": 18171,
+        "ct_rate": 29.47,
+        "total_fees_lbtc": 0.05543279,
+        "total_vsize": 60174460
+    },
+    {
+        "month": "2023-08",
+        "tx_count": 56486,
+        "ct_count": 11565,
+        "ct_rate": 20.47,
+        "total_fees_lbtc": 0.04427702,
+        "total_vsize": 53223757
+    },
+    {
+        "month": "2023-09",
+        "tx_count": 52933,
+        "ct_count": 10540,
+        "ct_rate": 19.91,
+        "total_fees_lbtc": 0.03326538,
+        "total_vsize": 39553850
+    },
+    {
+        "month": "2023-10",
+        "tx_count": 50508,
+        "ct_count": 6060,
+        "ct_rate": 12.0,
+        "total_fees_lbtc": 0.019202,
+        "total_vsize": 29103827
+    },
+    {
+        "month": "2023-11",
+        "tx_count": 52300,
+        "ct_count": 9670,
+        "ct_rate": 18.49,
+        "total_fees_lbtc": 0.03133465,
+        "total_vsize": 37536702
+    },
+    {
+        "month": "2023-12",
+        "tx_count": 152541,
+        "ct_count": 104726,
+        "ct_rate": 68.65,
+        "total_fees_lbtc": 0.42168149,
+        "total_vsize": 414626763
+    },
+    {
+        "month": "2024-01",
+        "tx_count": 97519,
+        "ct_count": 47270,
+        "ct_rate": 48.47,
+        "total_fees_lbtc": 0.15237527,
+        "total_vsize": 154249665
+    },
+    {
+        "month": "2024-02",
+        "tx_count": 71527,
+        "ct_count": 26680,
+        "ct_rate": 37.3,
+        "total_fees_lbtc": 0.07969317,
+        "total_vsize": 84964705
+    },
+    {
+        "month": "2024-03",
+        "tx_count": 81712,
+        "ct_count": 34431,
+        "ct_rate": 42.14,
+        "total_fees_lbtc": 0.10179137,
+        "total_vsize": 105824819
+    },
+    {
+        "month": "2024-04",
+        "tx_count": 76672,
+        "ct_count": 30634,
+        "ct_rate": 39.95,
+        "total_fees_lbtc": 0.07970926,
+        "total_vsize": 92781101
+    },
+    {
+        "month": "2024-05",
+        "tx_count": 79153,
+        "ct_count": 31679,
+        "ct_rate": 40.02,
+        "total_fees_lbtc": 0.06650217,
+        "total_vsize": 94379661
+    },
+    {
+        "month": "2024-06",
+        "tx_count": 75164,
+        "ct_count": 29628,
+        "ct_rate": 39.42,
+        "total_fees_lbtc": 0.06040353,
+        "total_vsize": 87764501
+    },
+    {
+        "month": "2024-07",
+        "tx_count": 84820,
+        "ct_count": 30809,
+        "ct_rate": 36.32,
+        "total_fees_lbtc": 0.06988074,
+        "total_vsize": 97735654
+    },
+    {
+        "month": "2024-08",
+        "tx_count": 81024,
+        "ct_count": 31007,
+        "ct_rate": 38.27,
+        "total_fees_lbtc": 0.06423598,
+        "total_vsize": 104116921
+    },
+    {
+        "month": "2024-09",
+        "tx_count": 92489,
+        "ct_count": 33603,
+        "ct_rate": 36.33,
+        "total_fees_lbtc": 0.06958516,
+        "total_vsize": 113222094
+    },
+    {
+        "month": "2024-10",
+        "tx_count": 87634,
+        "ct_count": 37721,
+        "ct_rate": 43.04,
+        "total_fees_lbtc": 0.06843575,
+        "total_vsize": 116521210
+    },
+    {
+        "month": "2024-11",
+        "tx_count": 94454,
+        "ct_count": 46018,
+        "ct_rate": 48.72,
+        "total_fees_lbtc": 0.09646504,
+        "total_vsize": 149977875
+    },
+    {
+        "month": "2024-12",
+        "tx_count": 104107,
+        "ct_count": 55044,
+        "ct_rate": 52.87,
+        "total_fees_lbtc": 0.12118057,
+        "total_vsize": 178718581
+    },
+    {
+        "month": "2025-01",
+        "tx_count": 116173,
+        "ct_count": 67067,
+        "ct_rate": 57.73,
+        "total_fees_lbtc": 0.1265435,
+        "total_vsize": 225377742
+    },
+    {
+        "month": "2025-02",
+        "tx_count": 117083,
+        "ct_count": 71799,
+        "ct_rate": 61.32,
+        "total_fees_lbtc": 0.11990145,
+        "total_vsize": 237160304
+    },
+    {
+        "month": "2025-03",
+        "tx_count": 128652,
+        "ct_count": 79615,
+        "ct_rate": 61.88,
+        "total_fees_lbtc": 0.11560604,
+        "total_vsize": 257863329
+    },
+    {
+        "month": "2025-04",
+        "tx_count": 124495,
+        "ct_count": 79674,
+        "ct_rate": 64.0,
+        "total_fees_lbtc": 0.09434134,
+        "total_vsize": 250406753
+    },
+    {
+        "month": "2025-05",
+        "tx_count": 147077,
+        "ct_count": 100178,
+        "ct_rate": 68.11,
+        "total_fees_lbtc": 0.09390637,
+        "total_vsize": 318317309
+    },
+    {
+        "month": "2025-06",
+        "tx_count": 166561,
+        "ct_count": 118810,
+        "ct_rate": 71.33,
+        "total_fees_lbtc": 0.08434301,
+        "total_vsize": 394226531
+    },
+    {
+        "month": "2025-07",
+        "tx_count": 186152,
+        "ct_count": 135170,
+        "ct_rate": 72.61,
+        "total_fees_lbtc": 0.11946475,
+        "total_vsize": 469936533
+    },
+    {
+        "month": "2025-08",
+        "tx_count": 202921,
+        "ct_count": 156879,
+        "ct_rate": 77.31,
+        "total_fees_lbtc": 0.11427329,
+        "total_vsize": 538013002
+    },
+    {
+        "month": "2025-09",
+        "tx_count": 212992,
+        "ct_count": 150685,
+        "ct_rate": 70.75,
+        "total_fees_lbtc": 0.10809011,
+        "total_vsize": 526611667
+    },
+    {
+        "month": "2025-10",
+        "tx_count": 243993,
+        "ct_count": 192586,
+        "ct_rate": 78.93,
+        "total_fees_lbtc": 0.12621561,
+        "total_vsize": 658399185
+    },
+    {
+        "month": "2025-11",
+        "tx_count": 276373,
+        "ct_count": 221178,
+        "ct_rate": 80.03,
+        "total_fees_lbtc": 0.16547376,
+        "total_vsize": 787229157
+    },
+    {
+        "month": "2025-12",
+        "tx_count": 286834,
+        "ct_count": 225962,
+        "ct_rate": 78.78,
+        "total_fees_lbtc": 0.15886714,
+        "total_vsize": 838921012
+    },
+    {
+        "month": "2026-01",
+        "tx_count": 361628,
+        "ct_count": 308602,
+        "ct_rate": 85.34,
+        "total_fees_lbtc": 0.2046171,
+        "total_vsize": 1201596630
+    },
+    {
+        "month": "2026-02",
+        "tx_count": 407350,
+        "ct_count": 360195,
+        "ct_rate": 88.42,
+        "total_fees_lbtc": 0.26132389,
+        "total_vsize": 1449528869
+    },
+    {
+        "month": "2026-03",
+        "tx_count": 523352,
+        "ct_count": 470730,
+        "ct_rate": 89.95,
+        "total_fees_lbtc": 0.30544967,
+        "total_vsize": 2023775468
+    },
+    {
+        "month": "2026-04",
+        "tx_count": 469840,
+        "ct_count": 421068,
+        "ct_rate": 89.62,
+        "total_fees_lbtc": 0.28610595,
+        "total_vsize": 1920456679
+    },
+    {
+        "month": "2026-05",
+        "tx_count": 286971,
+        "ct_count": 229048,
+        "ct_rate": 79.82,
+        "total_fees_lbtc": 0.21985654,
+        "total_vsize": 1383719040
+    },
+    {
+        "month": "2026-06",
+        "tx_count": 276137,
+        "ct_count": 224911,
+        "ct_rate": 81.45,
+        "total_fees_lbtc": 0.20777108,
+        "total_vsize": 1235428077
+    },
+    {
+        "month": "2026-07",
+        "tx_count": 261076,
+        "ct_count": 202277,
+        "ct_rate": 77.48,
+        "total_fees_lbtc": 0.15147425,
+        "total_vsize": 853255515
+    }
+]

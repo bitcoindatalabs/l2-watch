@@ -1,0 +1,674 @@
+[
+    {
+        "month": "2011-02",
+        "cum_minted_btc": 0.0,
+        "cum_verified_btc": 0.0,
+        "ratio": 100.0,
+        "unverified_volume_btc": 0.0
+    },
+    {
+        "month": "2018-09",
+        "cum_minted_btc": 0.012,
+        "cum_verified_btc": 0.00630679,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 0.00569321
+    },
+    {
+        "month": "2018-10",
+        "cum_minted_btc": 1.13296669,
+        "cum_verified_btc": 0.59544869,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 0.537518
+    },
+    {
+        "month": "2018-11",
+        "cum_minted_btc": 25.27510354,
+        "cum_verified_btc": 13.28373325,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 11.99137029
+    },
+    {
+        "month": "2018-12",
+        "cum_minted_btc": 25.31291474,
+        "cum_verified_btc": 13.30360553,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 12.00930921
+    },
+    {
+        "month": "2019-01",
+        "cum_minted_btc": 52.38311132,
+        "cum_verified_btc": 27.53077852,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 24.8523328
+    },
+    {
+        "month": "2019-02",
+        "cum_minted_btc": 52.73147726,
+        "cum_verified_btc": 27.71386779,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 25.01760947
+    },
+    {
+        "month": "2019-03",
+        "cum_minted_btc": 52.79298713,
+        "cum_verified_btc": 27.74619528,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 25.04679185
+    },
+    {
+        "month": "2019-04",
+        "cum_minted_btc": 53.4721123,
+        "cum_verified_btc": 28.10312033,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 25.36899197
+    },
+    {
+        "month": "2019-05",
+        "cum_minted_btc": 55.02027682,
+        "cum_verified_btc": 28.91678286,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 26.10349396
+    },
+    {
+        "month": "2019-06",
+        "cum_minted_btc": 55.68592492,
+        "cum_verified_btc": 29.26662482,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 26.4193001
+    },
+    {
+        "month": "2019-07",
+        "cum_minted_btc": 91.85991596,
+        "cum_verified_btc": 48.278442,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 43.58147396
+    },
+    {
+        "month": "2019-08",
+        "cum_minted_btc": 92.51723768,
+        "cum_verified_btc": 48.6239079,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 43.89332978
+    },
+    {
+        "month": "2019-09",
+        "cum_minted_btc": 92.90979023,
+        "cum_verified_btc": 48.83022014,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 44.07957009
+    },
+    {
+        "month": "2019-10",
+        "cum_minted_btc": 93.15481,
+        "cum_verified_btc": 48.95899418,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 44.19581582
+    },
+    {
+        "month": "2019-11",
+        "cum_minted_btc": 98.02028051,
+        "cum_verified_btc": 51.51611971,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 46.5041608
+    },
+    {
+        "month": "2019-12",
+        "cum_minted_btc": 101.05214051,
+        "cum_verified_btc": 53.10956202,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 47.94257849
+    },
+    {
+        "month": "2020-01",
+        "cum_minted_btc": 604.14924335,
+        "cum_verified_btc": 317.52025785,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 286.6289855
+    },
+    {
+        "month": "2020-02",
+        "cum_minted_btc": 837.12344042,
+        "cum_verified_btc": 439.96355798,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 397.15988244
+    },
+    {
+        "month": "2020-03",
+        "cum_minted_btc": 958.17623299,
+        "cum_verified_btc": 503.58478127,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 454.59145172
+    },
+    {
+        "month": "2020-04",
+        "cum_minted_btc": 2058.72156699,
+        "cum_verified_btc": 1081.99391125,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 976.72765574
+    },
+    {
+        "month": "2020-05",
+        "cum_minted_btc": 2160.41442787,
+        "cum_verified_btc": 1135.44021407,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1024.9742138
+    },
+    {
+        "month": "2020-06",
+        "cum_minted_btc": 2165.3864599,
+        "cum_verified_btc": 1138.0533447,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1027.3331152
+    },
+    {
+        "month": "2020-07",
+        "cum_minted_btc": 2486.32042587,
+        "cum_verified_btc": 1306.72530241,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1179.59512346
+    },
+    {
+        "month": "2020-08",
+        "cum_minted_btc": 2599.53774439,
+        "cum_verified_btc": 1366.22846751,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1233.30927688
+    },
+    {
+        "month": "2020-09",
+        "cum_minted_btc": 2600.8282043,
+        "cum_verified_btc": 1366.90668927,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1233.92151503
+    },
+    {
+        "month": "2020-10",
+        "cum_minted_btc": 2605.40060133,
+        "cum_verified_btc": 1369.30978536,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1236.09081597
+    },
+    {
+        "month": "2020-11",
+        "cum_minted_btc": 2608.80489413,
+        "cum_verified_btc": 1371.09896566,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1237.70592847
+    },
+    {
+        "month": "2020-12",
+        "cum_minted_btc": 2611.3778208,
+        "cum_verified_btc": 1372.45120826,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1238.92661254
+    },
+    {
+        "month": "2021-01",
+        "cum_minted_btc": 2769.34544156,
+        "cum_verified_btc": 1455.47360749,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1313.87183407
+    },
+    {
+        "month": "2021-02",
+        "cum_minted_btc": 2891.33109147,
+        "cum_verified_btc": 1519.58510881,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1371.74598266
+    },
+    {
+        "month": "2021-03",
+        "cum_minted_btc": 2898.87021002,
+        "cum_verified_btc": 1523.54741265,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1375.32279737
+    },
+    {
+        "month": "2021-04",
+        "cum_minted_btc": 2910.0416877,
+        "cum_verified_btc": 1529.41876068,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1380.62292702
+    },
+    {
+        "month": "2021-05",
+        "cum_minted_btc": 2981.1197039,
+        "cum_verified_btc": 1566.77494424,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1414.34475966
+    },
+    {
+        "month": "2021-06",
+        "cum_minted_btc": 2991.64661704,
+        "cum_verified_btc": 1572.30753112,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1419.33908592
+    },
+    {
+        "month": "2021-07",
+        "cum_minted_btc": 3007.70347166,
+        "cum_verified_btc": 1580.74646682,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1426.95700484
+    },
+    {
+        "month": "2021-08",
+        "cum_minted_btc": 3287.03703364,
+        "cum_verified_btc": 1727.5546696,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1559.48236404
+    },
+    {
+        "month": "2021-09",
+        "cum_minted_btc": 3390.25587031,
+        "cum_verified_btc": 1781.8029733,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1608.45289701
+    },
+    {
+        "month": "2021-10",
+        "cum_minted_btc": 3481.25546824,
+        "cum_verified_btc": 1829.62926145,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1651.62620679
+    },
+    {
+        "month": "2021-11",
+        "cum_minted_btc": 3511.12025008,
+        "cum_verified_btc": 1845.32517324,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1665.79507684
+    },
+    {
+        "month": "2021-12",
+        "cum_minted_btc": 3535.69429154,
+        "cum_verified_btc": 1858.24045215,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1677.45383939
+    },
+    {
+        "month": "2022-01",
+        "cum_minted_btc": 3739.15455667,
+        "cum_verified_btc": 1965.17223524,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1773.98232143
+    },
+    {
+        "month": "2022-02",
+        "cum_minted_btc": 3751.19912305,
+        "cum_verified_btc": 1971.50244895,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1779.6966741
+    },
+    {
+        "month": "2022-03",
+        "cum_minted_btc": 3762.04995775,
+        "cum_verified_btc": 1977.20527796,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1784.84467979
+    },
+    {
+        "month": "2022-04",
+        "cum_minted_btc": 3789.04919682,
+        "cum_verified_btc": 1991.3951581,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1797.65403872
+    },
+    {
+        "month": "2022-05",
+        "cum_minted_btc": 3830.59368388,
+        "cum_verified_btc": 2013.22952501,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1817.36415887
+    },
+    {
+        "month": "2022-06",
+        "cum_minted_btc": 3846.21124776,
+        "cum_verified_btc": 2021.43758446,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1824.7736633
+    },
+    {
+        "month": "2022-07",
+        "cum_minted_btc": 3883.18852852,
+        "cum_verified_btc": 2040.87158335,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1842.31694517
+    },
+    {
+        "month": "2022-08",
+        "cum_minted_btc": 3898.10132821,
+        "cum_verified_btc": 2048.70924276,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1849.39208545
+    },
+    {
+        "month": "2022-09",
+        "cum_minted_btc": 3916.94275902,
+        "cum_verified_btc": 2058.61165683,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1858.33110219
+    },
+    {
+        "month": "2022-10",
+        "cum_minted_btc": 3963.15933759,
+        "cum_verified_btc": 2082.90151584,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1880.25782175
+    },
+    {
+        "month": "2022-11",
+        "cum_minted_btc": 3986.3415037,
+        "cum_verified_btc": 2095.08527249,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1891.25623121
+    },
+    {
+        "month": "2022-12",
+        "cum_minted_btc": 4017.17850558,
+        "cum_verified_btc": 2111.29215001,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1905.88635557
+    },
+    {
+        "month": "2023-01",
+        "cum_minted_btc": 4046.69645899,
+        "cum_verified_btc": 2126.80578059,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1919.8906784
+    },
+    {
+        "month": "2023-02",
+        "cum_minted_btc": 4064.75719845,
+        "cum_verified_btc": 2136.29788989,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1928.45930856
+    },
+    {
+        "month": "2023-03",
+        "cum_minted_btc": 4138.00653722,
+        "cum_verified_btc": 2174.79524661,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1963.21129061
+    },
+    {
+        "month": "2023-04",
+        "cum_minted_btc": 4174.86182323,
+        "cum_verified_btc": 2194.16512921,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 1980.69669402
+    },
+    {
+        "month": "2023-05",
+        "cum_minted_btc": 4319.26105551,
+        "cum_verified_btc": 2270.05644575,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 2049.20460976
+    },
+    {
+        "month": "2023-06",
+        "cum_minted_btc": 4428.49858715,
+        "cum_verified_btc": 2327.46797046,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 2101.03061669
+    },
+    {
+        "month": "2023-07",
+        "cum_minted_btc": 4542.23169895,
+        "cum_verified_btc": 2387.24221893,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 2154.98948002
+    },
+    {
+        "month": "2023-08",
+        "cum_minted_btc": 4764.35537811,
+        "cum_verified_btc": 2503.98285655,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 2260.37252156
+    },
+    {
+        "month": "2023-09",
+        "cum_minted_btc": 5027.08051472,
+        "cum_verified_btc": 2642.06223683,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 2385.01827789
+    },
+    {
+        "month": "2023-10",
+        "cum_minted_btc": 5802.44257168,
+        "cum_verified_btc": 3049.56611598,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 2752.8764557
+    },
+    {
+        "month": "2023-11",
+        "cum_minted_btc": 6030.60927892,
+        "cum_verified_btc": 3169.48276326,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 2861.12651566
+    },
+    {
+        "month": "2023-12",
+        "cum_minted_btc": 6816.41599831,
+        "cum_verified_btc": 3582.47600111,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 3233.9399972
+    },
+    {
+        "month": "2024-01",
+        "cum_minted_btc": 7894.91838724,
+        "cum_verified_btc": 4149.30011021,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 3745.61827703
+    },
+    {
+        "month": "2024-02",
+        "cum_minted_btc": 8455.72079961,
+        "cum_verified_btc": 4444.0387506,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4011.68204901
+    },
+    {
+        "month": "2024-03",
+        "cum_minted_btc": 8644.86805256,
+        "cum_verified_btc": 4543.44810216,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4101.4199504
+    },
+    {
+        "month": "2024-04",
+        "cum_minted_btc": 8795.94962354,
+        "cum_verified_btc": 4622.85142825,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4173.09819529
+    },
+    {
+        "month": "2024-05",
+        "cum_minted_btc": 8912.88734595,
+        "cum_verified_btc": 4684.30991087,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4228.57743508
+    },
+    {
+        "month": "2024-06",
+        "cum_minted_btc": 9002.87286239,
+        "cum_verified_btc": 4731.60323234,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4271.26963005
+    },
+    {
+        "month": "2024-07",
+        "cum_minted_btc": 9121.91253139,
+        "cum_verified_btc": 4794.16642647,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4327.74610492
+    },
+    {
+        "month": "2024-08",
+        "cum_minted_btc": 9303.75120201,
+        "cum_verified_btc": 4889.73463618,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4414.01656583
+    },
+    {
+        "month": "2024-09",
+        "cum_minted_btc": 9471.44695976,
+        "cum_verified_btc": 4977.86981275,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4493.57714701
+    },
+    {
+        "month": "2024-10",
+        "cum_minted_btc": 10004.7155872,
+        "cum_verified_btc": 5258.13763391,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4746.57795329
+    },
+    {
+        "month": "2024-11",
+        "cum_minted_btc": 10243.0024115,
+        "cum_verified_btc": 5383.3730699,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 4859.6293416
+    },
+    {
+        "month": "2024-12",
+        "cum_minted_btc": 10692.653403,
+        "cum_verified_btc": 5619.69431061,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 5072.95909239
+    },
+    {
+        "month": "2025-01",
+        "cum_minted_btc": 10837.04413134,
+        "cum_verified_btc": 5695.58115778,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 5141.46297356
+    },
+    {
+        "month": "2025-02",
+        "cum_minted_btc": 10993.64482508,
+        "cum_verified_btc": 5777.88514674,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 5215.75967834
+    },
+    {
+        "month": "2025-03",
+        "cum_minted_btc": 11253.53787916,
+        "cum_verified_btc": 5914.47608094,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 5339.06179822
+    },
+    {
+        "month": "2025-04",
+        "cum_minted_btc": 11547.88634453,
+        "cum_verified_btc": 6069.17560535,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 5478.71073918
+    },
+    {
+        "month": "2025-05",
+        "cum_minted_btc": 11957.09393597,
+        "cum_verified_btc": 6284.24117297,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 5672.852763
+    },
+    {
+        "month": "2025-06",
+        "cum_minted_btc": 12200.67648495,
+        "cum_verified_btc": 6412.25986142,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 5788.41662353
+    },
+    {
+        "month": "2025-07",
+        "cum_minted_btc": 12752.90445995,
+        "cum_verified_btc": 6702.49206967,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 6050.41239028
+    },
+    {
+        "month": "2025-08",
+        "cum_minted_btc": 13154.92746081,
+        "cum_verified_btc": 6913.78166128,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 6241.14579953
+    },
+    {
+        "month": "2025-09",
+        "cum_minted_btc": 13498.00640576,
+        "cum_verified_btc": 7094.09226542,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 6403.91414034
+    },
+    {
+        "month": "2025-10",
+        "cum_minted_btc": 13983.48844755,
+        "cum_verified_btc": 7349.24508534,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 6634.24336221
+    },
+    {
+        "month": "2025-11",
+        "cum_minted_btc": 14561.60522349,
+        "cum_verified_btc": 7653.08356529,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 6908.5216582
+    },
+    {
+        "month": "2025-12",
+        "cum_minted_btc": 14893.81773925,
+        "cum_verified_btc": 7827.68314449,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 7066.13459476
+    },
+    {
+        "month": "2026-01",
+        "cum_minted_btc": 15185.4810608,
+        "cum_verified_btc": 7980.9714488,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 7204.509612
+    },
+    {
+        "month": "2026-02",
+        "cum_minted_btc": 15691.03376535,
+        "cum_verified_btc": 8246.67272522,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 7444.36104013
+    },
+    {
+        "month": "2026-03",
+        "cum_minted_btc": 16146.43969655,
+        "cum_verified_btc": 8486.01856616,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 7660.42113039
+    },
+    {
+        "month": "2026-04",
+        "cum_minted_btc": 16468.04728928,
+        "cum_verified_btc": 8655.04455915,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 7813.00273013
+    },
+    {
+        "month": "2026-05",
+        "cum_minted_btc": 16733.88777627,
+        "cum_verified_btc": 8794.76126144,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 7939.12651483
+    },
+    {
+        "month": "2026-06",
+        "cum_minted_btc": 17035.86890955,
+        "cum_verified_btc": 8953.47225605,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 8082.3966535
+    },
+    {
+        "month": "2026-07",
+        "cum_minted_btc": 17295.42714552,
+        "cum_verified_btc": 9089.88722126,
+        "ratio": 52.5566,
+        "unverified_volume_btc": 8205.53992426
+    }
+]
