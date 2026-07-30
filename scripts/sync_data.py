@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import math
 
 SOURCE_DIR = r"D:\LiquidAudit\data"
-DEST_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "liquid")
+DEST_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs", "data", "liquid")
 os.makedirs(DEST_DIR, exist_ok=True)
 
 def run_sync():

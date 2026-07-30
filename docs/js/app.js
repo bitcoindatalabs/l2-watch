@@ -1,4 +1,4 @@
-const DATA_DIR = '../data/liquid';
+const DATA_DIR = 'data/liquid';
 
 const formatter = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 2
