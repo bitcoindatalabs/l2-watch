@@ -1,28 +1,28 @@
 [
     {
         "bucket": "< 0.001",
-        "count": 23481,
-        "volume_btc": 9.91680228
+        "count": 23479,
+        "volume_btc": 9.9134721
     },
     {
         "bucket": "0.001 - 0.01",
-        "count": 42347,
-        "volume_btc": 166.01846934
+        "count": 42374,
+        "volume_btc": 166.13280234
     },
     {
         "bucket": "0.01 - 0.1",
-        "count": 33739,
-        "volume_btc": 1158.22797538
+        "count": 33759,
+        "volume_btc": 1158.71568686
     },
     {
         "bucket": "0.1 - 1",
-        "count": 12449,
-        "volume_btc": 3624.87803771
+        "count": 12443,
+        "volume_btc": 3622.69421546
     },
     {
         "bucket": "1 - 10",
-        "count": 1793,
-        "volume_btc": 3512.19303723
+        "count": 1791,
+        "volume_btc": 3508.68722859
     },
     {
         "bucket": "10 - 100",

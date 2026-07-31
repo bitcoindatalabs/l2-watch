@@ -49,11 +49,15 @@ async function loadData() {
             removeSkeleton('kpi-minted');
             removeSkeleton('kpi-burned');
             removeSkeleton('kpi-net-circulating');
-            removeSkeleton('kpi-verified');
+            removeSkeleton('kpi-pegin-rate');
+            removeSkeleton('kpi-pegout-rate');
+            
             setText('kpi-minted', formatBTC(summary.total_minted_btc));
             setText('kpi-burned', formatBTC(summary.total_pegout_btc || 0));
             setText('kpi-net-circulating', formatBTC(summary.net_circulating_btc || summary.total_minted_btc));
-            setText('kpi-verified', formatBTC(summary.total_verified_btc));
+            
+            setText('kpi-pegin-rate', formatPercent(summary.verification_pass_rate));
+            setText('kpi-pegout-rate', formatPercent(summary.pegout_verification_pass_rate));
         }
 
         // Load Reserve Timeseries Chart
@@ -64,21 +68,35 @@ async function loadData() {
         }
         
         // Load Size Distribution & Percentiles
-        const [sizeRes, pctRes] = await Promise.all([
-            fetch(`${DATA_DIR}/pegin_size_distribution.json`),
-            fetch(`${DATA_DIR}/pegin_percentiles.json`)
-        ]);
-        if (sizeRes.ok && pctRes.ok) {
+        const sizeRes = await fetch(`${DATA_DIR}/pegin_size_distribution.json`);
+        let pct = null;
+        try {
+            const pctRes = await fetch(`${DATA_DIR}/pegin_percentiles.json`);
+            if (pctRes.ok) {
+                pct = await pctRes.json();
+            }
+        } catch (e) {
+            console.warn("pegin_percentiles.json not found");
+        }
+        if (sizeRes.ok) {
             const size = await sizeRes.json();
-            const pct = await pctRes.json();
             renderSizeChart(size, pct);
         }
 
         // Load TVL Chart
-        const tvlRes = await fetch(`${DATA_DIR}/tvl_daily.json`);
+        const tvlRes = await fetch(`${DATA_DIR}/capital_flow.json`);
         if (tvlRes.ok) {
-            const tvl = await tvlRes.json();
-            renderTVLChart(tvl);
+            const capitalFlow = await tvlRes.json();
+            let currentTVL = 0;
+            const tvlData = capitalFlow.map(d => {
+                currentTVL += d.net_flow_btc;
+                return {
+                    date: d.date,
+                    net_flow: d.net_flow_btc,
+                    net_tvl: currentTVL
+                };
+            });
+            renderTVLChart(tvlData);
         }
 
         // Load Monthly Activity
@@ -87,16 +105,56 @@ async function loadData() {
             const activity = await activityRes.json();
             renderNetworkCharts(activity);
             renderAssetsCharts(activity);
+            renderIssuanceChart(activity);
             
             // Update KPIs
             const latestMonth = activity[activity.length - 1];
             if (latestMonth) {
                 removeSkeleton('kpi-avg-fee');
                 removeSkeleton('kpi-ct-rate');
+                removeSkeleton('kpi-total-tx');
                 const avgFee = latestMonth.tx_count > 0 ? (latestMonth.total_fees_lbtc / latestMonth.tx_count) : 0;
-                setText('kpi-avg-fee', formatBTC(avgFee));
+                const avgFeeSats = Math.round(avgFee * 1e8);
+                setText('kpi-avg-fee', new Intl.NumberFormat('en-US').format(avgFeeSats) + ' sats');
                 setText('kpi-ct-rate', formatPercent(latestMonth.ct_rate));
+                
+                // Compute total transactions
+                const totalTx = activity.reduce((sum, month) => sum + (month.tx_count || 0), 0);
+                setText('kpi-total-tx', new Intl.NumberFormat('en-US').format(totalTx));
             }
+        }
+
+        // Load additional heavy network data
+        const whaleRes = await fetch(`${DATA_DIR}/whale_activity.json`);
+        if (whaleRes.ok) {
+            const whale = await whaleRes.json();
+            const tbody = document.querySelector('#table-whale-activity tbody');
+            if (tbody) {
+                tbody.innerHTML = whale.map(w => `<tr>
+                    <td>${w.date}</td>
+                    <td>${w.txid}</td>
+                    <td>${w.lbtc > 0 ? w.lbtc.toFixed(2) : '-'}</td>
+                    <td>${w.usdt > 0 ? w.usdt.toFixed(2) : '-'}</td>
+                </tr>`).join('');
+            }
+        }
+
+        const utxoRes = await fetch(`${DATA_DIR}/utxo_bloat.json`);
+        if (utxoRes.ok) {
+            const utxo = await utxoRes.json();
+            renderUTXOChart(utxo);
+        }
+
+        const cryptoRes = await fetch(`${DATA_DIR}/cryptographic_overhead.json`);
+        if (cryptoRes.ok) {
+            const crypto = await cryptoRes.json();
+            renderCryptoChart(crypto);
+        }
+
+        const fedPartRes = await fetch(`${DATA_DIR}/federation_participation.json`);
+        if (fedPartRes.ok) {
+            const fedPart = await fedPartRes.json();
+            renderFedPartChart(fedPart);
         }
 
         // Load Federation Health
@@ -375,15 +433,19 @@ document.addEventListener('DOMContentLoaded', () => {
 // New Render Functions for Monthly Activity
 function renderNetworkCharts(data) {
     removeSkeleton('chart-tx-count');
+    removeSkeleton('chart-volume');
     removeSkeleton('chart-fees');
     
     const elTx = document.getElementById('chart-tx-count');
+    const elVol = document.getElementById('chart-volume');
     const elFees = document.getElementById('chart-fees');
-    if (!elTx || !elFees) return;
+    if (!elTx || !elVol || !elFees) return;
     
     const chartTx = echarts.init(elTx);
+    const chartVol = echarts.init(elVol);
     const chartFees = echarts.init(elFees);
     charts['txCount'] = chartTx;
+    charts['volume'] = chartVol;
     charts['fees'] = chartFees;
     
     const months = data.map(d => d.month);
@@ -409,25 +471,59 @@ function renderNetworkCharts(data) {
         }]
     });
     
-    // Fees Chart
-    chartFees.setOption({
+    // Volume Chart
+    chartVol.setOption({
         ...darkTheme,
         tooltip: { trigger: 'axis' },
         grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
         xAxis: { type: 'category', data: months, ...darkTheme.xAxis },
-        yAxis: { type: 'value', name: 'Total Fees (L-BTC)', ...darkTheme.yAxis },
+        yAxis: { type: 'value', name: 'Volume (vBytes)', ...darkTheme.yAxis },
         series: [{
-            name: 'Total Fees',
+            name: 'vBytes',
             type: 'line',
-            data: data.map(d => d.total_fees_lbtc),
-            lineStyle: { color: '#8b5cf6', width: 2 },
+            data: data.map(d => d.total_vsize),
+            lineStyle: { color: '#10b981', width: 2 },
             showSymbol: false,
             areaStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: 'rgba(139, 92, 246, 0.3)' },
+                    { offset: 0, color: 'rgba(16, 185, 129, 0.3)' },
+                    { offset: 1, color: 'rgba(16, 185, 129, 0)' }
+                ])
+            }
+        }]
+    });
+
+    // Fees Chart
+    chartFees.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+        legend: { data: ['Total Fees (L-BTC)', 'Avg Fee/TX (sats)'] },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'category', data: months, ...darkTheme.xAxis },
+        yAxis: [
+            { type: 'value', name: 'Total Fees (L-BTC)', ...darkTheme.yAxis, position: 'left' },
+            { type: 'value', name: 'Avg Fee/TX (sats)', ...darkTheme.yAxis, position: 'right', splitLine: { show: false } }
+        ],
+        series: [{
+            name: 'Total Fees (L-BTC)',
+            type: 'line',
+            data: data.map(d => d.total_fees_lbtc),
+            lineStyle: { color: '#8b5cf6', width: 3 },
+            showSymbol: false,
+            areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: 'rgba(139, 92, 246, 0.4)' },
                     { offset: 1, color: 'rgba(139, 92, 246, 0)' }
                 ])
             }
+        },
+        {
+            name: 'Avg Fee/TX (sats)',
+            type: 'line',
+            yAxisIndex: 1,
+            data: data.map(d => d.tx_count > 0 ? Math.round((d.total_fees_lbtc * 1e8) / d.tx_count) : 0),
+            lineStyle: { color: '#f59e0b', width: 2, type: 'dashed' },
+            showSymbol: false
         }]
     });
 }
@@ -470,5 +566,101 @@ function renderAssetsCharts(data) {
                 }
             }
         ]
+    });
+}
+
+function renderIssuanceChart(data) {
+    removeSkeleton('chart-issuance');
+    const el = document.getElementById('chart-issuance');
+    if (!el) return;
+    const chart = echarts.init(el);
+    charts['issuance'] = chart;
+    
+    const months = data.map(d => d.month);
+    
+    chart.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'axis' },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'category', data: months, ...darkTheme.xAxis },
+        yAxis: { type: 'value', name: 'Issuance Count', ...darkTheme.yAxis },
+        series: [{
+            name: 'New Assets',
+            type: 'bar',
+            data: data.map(d => d.issuance_count),
+            itemStyle: {
+                color: '#8b5cf6',
+                borderRadius: [4, 4, 0, 0]
+            }
+        }]
+    });
+}
+
+function renderUTXOChart(data) {
+    removeSkeleton('chart-utxo');
+    const el = document.getElementById('chart-utxo');
+    if (!el) return;
+    const chart = echarts.init(el);
+    charts['utxo'] = chart;
+    
+    chart.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'item' },
+        series: [{
+            type: 'pie',
+            radius: ['40%', '70%'],
+            data: [
+                { value: data.inputs, name: 'Inputs', itemStyle: { color: '#f7931a' } },
+                { value: data.outputs, name: 'Outputs', itemStyle: { color: '#10b981' } }
+            ],
+            label: { color: '#94a3b8' }
+        }]
+    });
+}
+
+function renderCryptoChart(data) {
+    removeSkeleton('chart-crypto-overhead');
+    const el = document.getElementById('chart-crypto-overhead');
+    if (!el) return;
+    const chart = echarts.init(el);
+    charts['crypto'] = chart;
+    
+    chart.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'item' },
+        series: [{
+            type: 'pie',
+            radius: '70%',
+            data: [
+                { value: data.core_tx_bytes, name: 'Core TX Bytes', itemStyle: { color: '#3b82f6' } },
+                { value: data.proof_bytes, name: 'Proof Bytes', itemStyle: { color: '#8b5cf6' } }
+            ],
+            label: { color: '#94a3b8' }
+        }]
+    });
+}
+
+function renderFedPartChart(data) {
+    removeSkeleton('chart-federation-participation');
+    const el = document.getElementById('chart-federation-participation');
+    if (!el) return;
+    const chart = echarts.init(el);
+    charts['fedPart'] = chart;
+    
+    chart.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'category', data: data.map(d => d.address ? d.address.substring(0, 8) + '...' : 'Unknown'), ...darkTheme.xAxis },
+        yAxis: { type: 'value', name: 'Blocks Proposed', ...darkTheme.yAxis },
+        series: [{
+            name: 'Blocks',
+            type: 'bar',
+            data: data.map(d => d.blocks),
+            itemStyle: {
+                color: '#f59e0b',
+                borderRadius: [4, 4, 0, 0]
+            }
+        }]
     });
 }

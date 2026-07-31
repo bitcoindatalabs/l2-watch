@@ -1,9 +1,10 @@
 {
-    "total_minted_btc": 17295.42714552,
-    "total_pegout_btc": 13058.41505124,
-    "net_circulating_btc": 4237.01209428,
-    "total_verified_btc": 9089.88722126,
-    "collateralization_ratio": 52.5566,
-    "total_pegin_count": 114021,
-    "verification_pass_rate": 21.8977
+    "total_minted_btc": 17292.49327086,
+    "total_pegout_btc": 13073.20972368,
+    "net_circulating_btc": 4219.28354718,
+    "total_verified_btc": 17292.03943692,
+    "collateralization_ratio": 99.9974,
+    "total_pegin_count": 114052,
+    "verification_pass_rate": 99.9947,
+    "pegout_verification_pass_rate": 98.6353
 }

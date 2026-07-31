@@ -25,7 +25,7 @@
 
         <main>
                 <!-- Hero KPIs -->
-                <div class="kpi-grid">
+                <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
                     <div class="kpi-card minted">
                         <div class="kpi-label">Gross Minted (Peg-ins)</div>
                         <div class="kpi-value orange skeleton" id="kpi-minted"></div>
@@ -39,8 +39,12 @@
                         <div class="kpi-value green skeleton" id="kpi-net-circulating"></div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-label">Verified Backing</div>
-                        <div class="kpi-value skeleton" id="kpi-verified"></div>
+                        <div class="kpi-label">Peg-in Verification Rate</div>
+                        <div class="kpi-value skeleton" id="kpi-pegin-rate"></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Peg-out Verification Rate</div>
+                        <div class="kpi-value skeleton" id="kpi-pegout-rate"></div>
                     </div>
                 </div>
                 <!-- Charts Section -->
@@ -77,6 +81,40 @@
                     <div class="chart-canvas" id="chart-tvl">
                         <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
                     </div>
+                </div>
+                
+                <!-- Cryptographic Overhead -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2 class="chart-title">Cryptographic Overhead</h2>
+                        <div class="chart-subtitle">Transaction bytes vs. Proof bytes</div>
+                    </div>
+                    <div class="chart-canvas" id="chart-crypto-overhead">
+                        <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Whale Activity Alerts Table -->
+            <div class="chart-container" style="margin-top: 1.5rem;">
+                <div class="chart-header">
+                    <h2 class="chart-title">Whale Activity Alerts</h2>
+                    <div class="chart-subtitle">Recent large transactions (>10 L-BTC or >100k USDT)</div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="data-table" id="table-whale-activity">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>TXID</th>
+                                <th>L-BTC</th>
+                                <th>USDT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
