@@ -145,12 +145,6 @@ async function loadData() {
             renderUTXOChart(utxo);
         }
 
-        const cryptoRes = await fetch(`${DATA_DIR}/cryptographic_overhead.json`);
-        if (cryptoRes.ok) {
-            const crypto = await cryptoRes.json();
-            renderCryptoChart(crypto);
-        }
-
         const fedPartRes = await fetch(`${DATA_DIR}/federation_participation.json`);
         if (fedPartRes.ok) {
             const fedPart = await fedPartRes.json();
@@ -612,28 +606,6 @@ function renderUTXOChart(data) {
             data: [
                 { value: data.inputs, name: 'Inputs', itemStyle: { color: '#f7931a' } },
                 { value: data.outputs, name: 'Outputs', itemStyle: { color: '#10b981' } }
-            ],
-            label: { color: '#94a3b8' }
-        }]
-    });
-}
-
-function renderCryptoChart(data) {
-    removeSkeleton('chart-crypto-overhead');
-    const el = document.getElementById('chart-crypto-overhead');
-    if (!el) return;
-    const chart = echarts.init(el);
-    charts['crypto'] = chart;
-    
-    chart.setOption({
-        ...darkTheme,
-        tooltip: { trigger: 'item' },
-        series: [{
-            type: 'pie',
-            radius: '70%',
-            data: [
-                { value: data.core_tx_bytes, name: 'Core TX Bytes', itemStyle: { color: '#3b82f6' } },
-                { value: data.proof_bytes, name: 'Proof Bytes', itemStyle: { color: '#8b5cf6' } }
             ],
             label: { color: '#94a3b8' }
         }]
