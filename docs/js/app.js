@@ -106,6 +106,7 @@ async function loadData() {
             renderNetworkCharts(activity);
             renderAssetsCharts(activity);
             renderIssuanceChart(activity);
+            renderPrivacyCostChart(activity);
             
             // Update KPIs
             const latestMonth = activity[activity.length - 1];
@@ -149,6 +150,13 @@ async function loadData() {
         if (fedPartRes.ok) {
             const fedPart = await fedPartRes.json();
             renderFedPartChart(fedPart);
+        }
+
+        // Load Asset Activity
+        const assetActivityRes = await fetch(`${DATA_DIR}/asset_activity.json`);
+        if (assetActivityRes.ok) {
+            const assetActivity = await assetActivityRes.json();
+            renderAssetActivityCharts(assetActivity);
         }
 
         // Load Federation Health
@@ -600,12 +608,15 @@ function renderUTXOChart(data) {
     chart.setOption({
         ...darkTheme,
         tooltip: { trigger: 'item' },
+        legend: { top: 'bottom' },
         series: [{
+            name: 'UTXO Type',
             type: 'pie',
             radius: ['40%', '70%'],
             data: [
                 { value: data.inputs, name: 'Inputs', itemStyle: { color: '#f7931a' } },
-                { value: data.outputs, name: 'Outputs', itemStyle: { color: '#10b981' } }
+                { value: data.unblinded_outputs || 0, name: 'Public Outputs', itemStyle: { color: '#10b981' } },
+                { value: data.blinded_outputs || 0, name: 'Blinded Outputs', itemStyle: { color: '#8b5cf6' } }
             ],
             label: { color: '#94a3b8' }
         }]
@@ -634,5 +645,100 @@ function renderFedPartChart(data) {
                 borderRadius: [4, 4, 0, 0]
             }
         }]
+    });
+}
+
+function renderAssetActivityCharts(data) {
+    removeSkeleton('chart-asset-volume');
+    removeSkeleton('chart-asset-tx-count');
+    
+    const elVol = document.getElementById('chart-asset-volume');
+    const elTx = document.getElementById('chart-asset-tx-count');
+    
+    if (!elVol || !elTx) return;
+    
+    const chartVol = echarts.init(elVol);
+    const chartTx = echarts.init(elTx);
+    charts['assetVol'] = chartVol;
+    charts['assetTx'] = chartTx;
+    
+    const months = data.map(d => d.month);
+    
+    // Extract tickers
+    const tickers = new Set();
+    data.forEach(m => {
+        Object.keys(m).forEach(k => {
+            if (k !== 'month' && k !== 'Unknown') tickers.add(k);
+        });
+    });
+    
+    // Filter specifically for top non-native assets we care about (USDt and BMN)
+    const tickerArray = Array.from(tickers).filter(t => t === 'USDt' || t.startsWith('BMN'));
+
+    const seriesVol = tickerArray.map(ticker => ({
+        name: ticker,
+        type: 'bar',
+        stack: 'total',
+        data: data.map(d => (d[ticker] ? d[ticker].volume : 0))
+    }));
+
+    const seriesTx = tickerArray.map(ticker => ({
+        name: ticker,
+        type: 'line',
+        data: data.map(d => (d[ticker] ? d[ticker].tx_count : 0)),
+        width: 3
+    }));
+
+    chartVol.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: { data: tickerArray },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'category', data: months, ...darkTheme.xAxis },
+        yAxis: { type: 'value', name: 'Volume', ...darkTheme.yAxis },
+        series: seriesVol
+    });
+
+    chartTx.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'axis' },
+        legend: { data: tickerArray },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'category', data: months, ...darkTheme.xAxis },
+        yAxis: { type: 'value', name: 'Transactions', ...darkTheme.yAxis },
+        series: seriesTx
+    });
+}
+
+function renderPrivacyCostChart(data) {
+    removeSkeleton('chart-privacy-cost');
+    const el = document.getElementById('chart-privacy-cost');
+    if (!el) return;
+    const chart = echarts.init(el);
+    charts['privacyCost'] = chart;
+    
+    const months = data.map(d => d.month);
+    
+    chart.setOption({
+        ...darkTheme,
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: { data: ['CT Avg Fee (sats)', 'Public Avg Fee (sats)'] },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'category', data: months, ...darkTheme.xAxis },
+        yAxis: { type: 'value', name: 'Sats / TX', ...darkTheme.yAxis },
+        series: [
+            {
+                name: 'CT Avg Fee (sats)',
+                type: 'bar',
+                data: data.map(d => d.ct_avg_fee_sats || 0),
+                itemStyle: { color: '#8b5cf6', borderRadius: [4, 4, 0, 0] }
+            },
+            {
+                name: 'Public Avg Fee (sats)',
+                type: 'bar',
+                data: data.map(d => d.non_ct_avg_fee_sats || 0),
+                itemStyle: { color: '#10b981', borderRadius: [4, 4, 0, 0] }
+            }
+        ]
     });
 }

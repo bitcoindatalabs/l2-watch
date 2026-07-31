@@ -12,6 +12,18 @@ def run_sync_heavy():
 
     monthly_activity = {}
     daily_stats = {}
+    asset_activity = {}
+    
+    asset_registry = {}
+    asset_file = os.path.join(SOURCE_DIR, "asset_registry_cache.json")
+    if os.path.exists(asset_file):
+        with open(asset_file, 'r', encoding='utf-8') as f:
+            try:
+                registry = json.load(f)
+                for asset_id, data in registry.items():
+                    asset_registry[asset_id] = data.get("ticker", "Unknown")
+            except: pass
+
     pegin_size_distribution = {
         "< 0.001": {"count": 0, "volume_btc": 0.0},
         "0.001 - 0.01": {"count": 0, "volume_btc": 0.0},
@@ -31,7 +43,7 @@ def run_sync_heavy():
         return "> 100"
 
     whale_txs = []
-    utxo_bloat = {"inputs": 0, "outputs": 0}
+    utxo_bloat = {"inputs": 0, "outputs": 0, "blinded_outputs": 0, "unblinded_outputs": 0}
     seen_txids = set()
 
     # Pass 1: Transactions
@@ -58,40 +70,68 @@ def run_sync_heavy():
                     monthly_activity[month_str] = {
                         "tx_count": 0, "ct_count": 0, "total_fees_lbtc": 0.0, 
                         "total_vsize": 0, "observable_volume_lbtc": 0.0, 
-                        "observable_volume_usdt": 0.0, "issuance_count": 0
+                        "observable_volume_usdt": 0.0, "issuance_count": 0,
+                        "ct_vsize": 0, "non_ct_vsize": 0, "ct_fees": 0.0, "non_ct_fees": 0.0
                     }
                 if date_str not in daily_stats:
                     daily_stats[date_str] = {"pegin_btc": 0.0, "pegout_btc": 0.0}
+                if month_str not in asset_activity:
+                    asset_activity[month_str] = defaultdict(lambda: {"volume": 0.0, "tx_count": 0})
 
                 # Core stats
                 monthly_activity[month_str]["tx_count"] += 1
-                if tx.get('has_blinded_outputs'):
+                is_ct = tx.get('has_blinded_outputs', False)
+                fee = tx.get('fee', 0)
+                vsize = tx.get('vsize', 0)
+                
+                if is_ct:
                     monthly_activity[month_str]["ct_count"] += 1
-                monthly_activity[month_str]["total_fees_lbtc"] += tx.get('fee', 0)
-                monthly_activity[month_str]["total_vsize"] += tx.get('vsize', 0)
+                    monthly_activity[month_str]["ct_vsize"] += vsize
+                    monthly_activity[month_str]["ct_fees"] += fee
+                else:
+                    monthly_activity[month_str]["non_ct_vsize"] += vsize
+                    monthly_activity[month_str]["non_ct_fees"] += fee
+
+                monthly_activity[month_str]["total_fees_lbtc"] += fee
+                monthly_activity[month_str]["total_vsize"] += vsize
                 if tx.get('is_issuance'):
                     monthly_activity[month_str]["issuance_count"] += 1
 
                 # UTXO bloat
                 inputs_count = len(tx.get('inputs', []))
-                outputs_count = len(tx.get('outputs', []))
+                outputs_list = tx.get('outputs', [])
+                outputs_count = len(outputs_list)
                 utxo_bloat["inputs"] += inputs_count
                 utxo_bloat["outputs"] += outputs_count
+                if is_ct:
+                    utxo_bloat["blinded_outputs"] += outputs_count
+                else:
+                    utxo_bloat["unblinded_outputs"] += outputs_count
 
                 # Observable Volume and Whales
                 tx_lbtc_val = 0.0
                 tx_usdt_val = 0.0
+                assets_in_tx = set()
+                
                 for vout in tx.get('outputs', []):
                     if 'asset' in vout and 'value' in vout:
                         asset_id = vout['asset']
                         val = vout['value']
                         if val > 0:
+                            ticker = asset_registry.get(asset_id)
+                            if ticker:
+                                asset_activity[month_str][ticker]["volume"] += val
+                                assets_in_tx.add(ticker)
+                                
                             if asset_id == '6f0279e9ed041c3d710a9f57d0c02928416460c4b722ae3457a11eec381c526d':
                                 monthly_activity[month_str]["observable_volume_lbtc"] += val
                                 tx_lbtc_val += val
                             elif asset_id == 'ce091c998b83c78bb71a632313ba3760f1763d9cfcffae02258ffa9865a37bd2':
                                 monthly_activity[month_str]["observable_volume_usdt"] += val
                                 tx_usdt_val += val
+                
+                for ticker in assets_in_tx:
+                    asset_activity[month_str][ticker]["tx_count"] += 1
 
                 # Whales tracking (arbitrary thresholds: 10 L-BTC or 100k USDT)
                 if tx_lbtc_val >= 10.0 or tx_usdt_val >= 100000.0:
@@ -176,14 +216,23 @@ def run_sync_heavy():
         stats = monthly_activity[m]
         ct_rate = (stats["ct_count"] / stats["tx_count"] * 100) if stats["tx_count"] > 0 else 0
         sats_per_vb = (stats["total_fees_lbtc"] * 1e8) / stats["total_vsize"] if stats["total_vsize"] > 0 else 0
+        
+        ct_avg_fee = (stats["ct_fees"] * 1e8) / stats["ct_count"] if stats.get("ct_count", 0) > 0 else 0
+        non_ct_count = stats["tx_count"] - stats.get("ct_count", 0)
+        non_ct_avg_fee = (stats["non_ct_fees"] * 1e8) / non_ct_count if non_ct_count > 0 else 0
+
         monthly_activity_out.append({
             "month": m,
             "tx_count": stats["tx_count"],
-            "ct_count": stats["ct_count"],
+            "ct_count": stats.get("ct_count", 0),
             "ct_rate": round(ct_rate, 2),
             "total_fees_lbtc": round(stats["total_fees_lbtc"], 8),
             "total_vsize": stats["total_vsize"],
             "avg_sats_per_vbyte": round(sats_per_vb, 2),
+            "ct_vsize": stats.get("ct_vsize", 0),
+            "non_ct_vsize": stats.get("non_ct_vsize", 0),
+            "ct_avg_fee_sats": round(ct_avg_fee, 2),
+            "non_ct_avg_fee_sats": round(non_ct_avg_fee, 2),
             "observable_volume_lbtc": round(stats.get("observable_volume_lbtc", 0.0), 8),
             "observable_volume_usdt": round(stats.get("observable_volume_usdt", 0.0), 8),
             "issuance_count": stats["issuance_count"]
@@ -191,6 +240,18 @@ def run_sync_heavy():
     with open(os.path.join(DEST_DIR, "monthly_activity.json"), 'w') as f:
         json.dump(monthly_activity_out, f, indent=4)
         
+    asset_activity_out = []
+    for m in sorted(asset_activity.keys()):
+        month_data = {"month": m}
+        for ticker, data in asset_activity[m].items():
+            month_data[ticker] = {
+                "volume": round(data["volume"], 8),
+                "tx_count": data["tx_count"]
+            }
+        asset_activity_out.append(month_data)
+    with open(os.path.join(DEST_DIR, "asset_activity.json"), 'w') as f:
+        json.dump(asset_activity_out, f, indent=4)
+
     whale_txs.sort(key=lambda x: x['lbtc'], reverse=True)
     with open(os.path.join(DEST_DIR, "whale_activity.json"), 'w') as f:
         json.dump(whale_txs[:100], f, indent=4)

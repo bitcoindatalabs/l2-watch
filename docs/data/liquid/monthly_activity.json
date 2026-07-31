@@ -1141,14 +1141,14 @@
     },
     {
         "month": "2026-07",
-        "tx_count": 277343,
-        "ct_count": 214308,
-        "ct_rate": 77.27,
-        "total_fees_lbtc": 0.1602239,
-        "total_vsize": 900139411,
+        "tx_count": 277625,
+        "ct_count": 214545,
+        "ct_rate": 77.28,
+        "total_fees_lbtc": 0.16033629,
+        "total_vsize": 900893692,
         "avg_sats_per_vbyte": 0.02,
-        "observable_volume_lbtc": 582.17716251,
+        "observable_volume_lbtc": 582.17761854,
         "observable_volume_usdt": 0.0,
-        "issuance_count": 469
+        "issuance_count": 470
     }
 ]
