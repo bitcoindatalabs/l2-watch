@@ -1,126 +1,170 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liquid Network Audit Dashboard - Reserve Proof</title>
-    <!-- Bitcoin Data Labs styles -->
-    <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserves &amp; Custody UTXOs — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Cross-chain Bitcoin custody audit for Liquid Network: backing ratio, reserve gap decomposition, emergency 2-of-3 timelock exposure, and full unspent UTXO explorer.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 </head>
-<body class="has-fixed-header">
-    <!-- Bitcoin Data Labs Header -->
-    <div id="header"></div>
-    <div class="main-content container">
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
 
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
 
-        <style>
-            .data-table { width: 100%; border-collapse: collapse; color: var(--text-secondary); font-size: 0.9rem; }
-            .data-table th { text-align: left; padding: 0.75rem; border-bottom: 1px solid var(--border-color); color: var(--text-primary); }
-            .data-table td { padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-family: monospace; }
-        </style>
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-vault"></i> Custody Graph · Proof of Reserves</div>
+      <h1 class="page-title">Reserves &amp; Timelock Exposure</h1>
+      <p class="page-lead">Every custody output traced directly from every peg-in outpoint through federation sweeps and change scripts on Bitcoin L1, reconciled block-by-block against L-BTC circulating supply.</p>
+    </header>
 
-        <main>
-                <!-- Hero KPIs -->
-                <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                    <div class="kpi-card minted">
-                        <div class="kpi-label">Gross Minted (Peg-ins)</div>
-                        <div class="kpi-value orange skeleton" id="kpi-minted"></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Total Burned (Peg-outs)</div>
-                        <div class="kpi-value skeleton" id="kpi-burned"></div>
-                    </div>
-                    <div class="kpi-card verified">
-                        <div class="kpi-label">Net Circulating Supply</div>
-                        <div class="kpi-value green skeleton" id="kpi-net-circulating"></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Peg-in Verification Rate</div>
-                        <div class="kpi-value skeleton" id="kpi-pegin-rate"></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Peg-out Verification Rate</div>
-                        <div class="kpi-value skeleton" id="kpi-pegout-rate"></div>
-                    </div>
-                </div>
-                <!-- Charts Section -->
-            <div class="charts-grid">
-                <!-- Reserve Proof Area Chart -->
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h2 class="chart-title">Collateralization Ratio Over Time</h2>
-                        <div class="chart-subtitle">Cumulative L-BTC minted vs. mainchain-verified Bitcoin reserves</div>
-                    </div>
-                    <div class="chart-canvas" id="chart-reserve-history">
-                        <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                    </div>
-                </div>
-
-                <!-- Peg-in Size Histogram -->
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h2 class="chart-title">Peg-in Size Distribution</h2>
-                        <div class="chart-subtitle">Log-scale buckets of L-BTC peg-ins</div>
-                    </div>
-                    <div class="chart-canvas" id="chart-pegin-size">
-                        <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="charts-grid">
-                <div class="chart-container" style="grid-column: 1 / -1;">
-                    <div class="chart-header">
-                        <h2 class="chart-title">Network Activity & TVL (Net Flow)</h2>
-                        <div class="chart-subtitle">Daily inflows and outflows</div>
-                    </div>
-                    <div class="chart-canvas" id="chart-tvl">
-                        <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Whale Activity Alerts Table -->
-            <div class="chart-container" style="margin-top: 1.5rem;">
-                <div class="chart-header">
-                    <h2 class="chart-title">Whale Activity Alerts</h2>
-                    <div class="chart-subtitle">Recent large transactions (>10 L-BTC or >100k USDT)</div>
-                </div>
-                <div style="overflow-x: auto;">
-                    <table class="data-table" id="table-whale-activity">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>TXID</th>
-                                <th>L-BTC</th>
-                                <th>USDT</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Populated by JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
-
-        <div class="dashboard-footer">
-            <p>Data provided by local Liquid Elements node & Bitcoin Core verification. Data is updated daily.</p>
+    <main>
+      <section class="section-block">
+        <div class="kpi-grid" id="reserves-kpis">
+          <div class="kpi-card accent-pass"><div class="kpi-label">Verified BTC Reserve</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-gold"><div class="kpi-label">L-BTC Supply</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-pass"><div class="kpi-label">Net Reserve Gap</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-cool"><div class="kpi-label">Unspent Custody UTXOs</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-danger"><div class="kpi-label">Peak 2-of-3 CSV Exposure</div><div class="kpi-value skeleton">&nbsp;</div></div>
         </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Backing Ratio &amp; Reserve vs. Supply (Daily, 2018–2026)</h2>
+              <p class="panel-subtitle">Reconciles every unspent Bitcoin custody UTXO against Liquid L-BTC supply; includes intraday low markers during the Sep–Nov 2026 shortfall</p>
+            </div>
+            <div class="panel-controls">
+              <div class="btn-group" id="res-range-btns" role="group" aria-label="Range">
+                <button type="button" class="btn-seg active" data-range="all">All Time</button>
+                <button type="button" class="btn-seg" data-range="2025">2025–2026</button>
+                <button type="button" class="btn-seg" data-range="sep26">Aug–Nov 2026</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-canvas chart-tall" id="chart-reserves-main"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Emergency 2-of-3 Timelock Exposure (BTC)</h2>
+              <p class="panel-subtitle">Custody coins aged &ge; their script's CSV lock (2,016 blocks on 2018–2023 change script; 4,032 / 8,064 blocks under DynaFed)</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-timelock"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Reserve Holdings by Custody Generation</h2>
+              <p class="panel-subtitle">Migration of BTC reserves across legacy P2SH-P2WSH and DynaFed native P2WSH keysets</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-generations"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Reserve Gap Decomposition at Cutoff</h2>
+              <p class="panel-subtitle">Exact accounting identity (<span class="mono">reserve − supply = gap</span>, residual 0 sats) split into verifiable components</p>
+            </div>
+          </div>
+          <div class="kpi-grid kpi-grid-3" id="gap-breakdown" style="margin-bottom:0;"></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Verified Federation Custody Scripts (2018–2026)</h2>
+              <p class="panel-subtitle">Derived from Liquid chain parameters and revealed Bitcoin witness scripts — includes the 2018–2023 CSV 2,016 change script correction (<span class="mono">v0.1.1</span>)</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Verified Federation Custody Scripts" class="table-wrapper">
+            <table class="data-table" id="table-scripts">
+              <caption>Verified Federation Custody Scripts</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Keyset</th>
+                  <th scope="col" data-type="text">Role</th>
+                  <th scope="col" data-type="text">Normal / Emergency</th>
+                  <th scope="col" data-type="number" class="num">CSV Lock</th>
+                  <th scope="col" data-type="number" class="num">Unspent UTXOs</th>
+                  <th scope="col" data-type="number" class="num">Unspent BTC</th>
+                  <th scope="col" data-type="number" class="num">Normal / Emerg. Spends</th>
+                  <th scope="col" data-type="text">Program (Hex)</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Live Custody UTXO Explorer (All Unspent Outputs at Cutoff)</h2>
+              <p class="panel-subtitle">Every single unspent Bitcoin UTXO backing L-BTC at block 976,206 — click any txid to inspect on <span class="mono">mempool.space</span></p>
+            </div>
+            <div class="panel-controls">
+              <input type="search" id="utxo-search" class="l2-input" placeholder="Filter txid, origin, generation…" aria-label="Filter UTXOs">
+              <select id="utxo-origin-filter" class="l2-select" aria-label="Filter by origin">
+                <option value="all">All Origins</option>
+              </select>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Unspent Custody UTXOs" class="table-wrapper">
+            <table class="data-table" id="table-utxos">
+              <caption>All 164 unspent federation custody UTXOs at Bitcoin cutoff</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Bitcoin Outpoint</th>
+                  <th scope="col" data-type="number" class="num">Value (BTC)</th>
+                  <th scope="col" data-type="text">Origin</th>
+                  <th scope="col" data-type="text">Generation</th>
+                  <th scope="col" data-type="number" class="num">Created Height</th>
+                  <th scope="col" data-type="number" class="num">Age (Blocks)</th>
+                  <th scope="col" data-type="number" class="num">CSV Limit</th>
+                  <th scope="col" data-type="text">Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="utxo-count-note" style="margin-top:10px;font-size:0.8rem;color:var(--text-secondary);"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Source: <span class="mono">l2-data v0.1.1</span> (<span class="mono">reserve_daily.parquet</span>, <span class="mono">custody_outputs.parquet</span>, <span class="mono">timelock_exposure.parquet</span>).</span>
+      <span><a href="methods.html">View all 78/78 passing invariants &rarr;</a></span>
     </div>
+  </div>
 
-    <!-- Bitcoin Data Labs Footer -->
-    <div id="footer"></div>
-
-    <!-- Bitcoin Data Labs App Components -->
-    <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
-    <!-- App Configuration -->
-    <script src="js/app-config.js"></script>
-
-    <script src="js/app.js"></script>
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/reserves.js"></script>
 </body>
 </html>

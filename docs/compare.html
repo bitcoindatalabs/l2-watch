@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare Bitcoin L2s — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Side-by-side empirical comparison of Bitcoin Layer 2 architectures: Liquid Network (l2-data v0.1.1) vs. Lightning Network (lightning-data), plus Ark and Spark research roadmap.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
+
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
+
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-scale-balanced"></i> Common Audit Schema · Multi-L2 Architecture Comparison</div>
+      <h1 class="page-title">Compare Bitcoin Layer 2s</h1>
+      <p class="page-lead">Side-by-side comparison of custody models, unilateral exit guarantees, verifiable L1-backed BTC, privacy tradeoffs, and liveness across Bitcoin's Layer 2 ecosystem using Bitcoin Data Labs' open datasets.</p>
+    </header>
+
+    <main>
+      <section class="section-block">
+        <div class="compare-grid" id="compare-cards"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Verifiable L1 BTC Footprint: Liquid vs. Lightning (Public Gossip)</h2>
+              <p class="panel-subtitle">Liquid verified custody reserve (<span class="mono">l2-data v0.1.1</span>) vs. Lightning announced public channel capacity (<span class="mono">lightning-data</span>; unannounced private channels are excluded)</p>
+            </div>
+          </div>
+          <div class="chart-canvas chart-short" id="chart-compare-btc"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Trust, Custody &amp; Exit Matrix</h2>
+              <p class="panel-subtitle">Architectural comparison built on Bitcoin Data Labs' common L2 audit model (<span class="mono">custody</span>, <span class="mono">control</span>, <span class="mono">flows</span>, <span class="mono">liveness</span>)</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Bitcoin L2 Comparison Matrix" class="table-wrapper">
+            <table class="data-table" id="table-compare">
+              <caption>Comparison of Liquid, Lightning, Ark, and Spark</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">System</th>
+                  <th scope="col" data-type="text">Category</th>
+                  <th scope="col" data-type="number" class="num">Measured BTC</th>
+                  <th scope="col" data-type="text">Unilateral Exit</th>
+                  <th scope="col" data-type="text">Custody Control</th>
+                  <th scope="col" data-type="text">Privacy Model</th>
+                  <th scope="col" data-type="text">Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Liquid data: <span class="mono">l2-data v0.1.1</span> · Lightning data: <a href="https://github.com/bitcoindatalabs/lightning-data" target="_blank" rel="noopener">bitcoindatalabs/lightning-data</a> &amp; <a href="https://plebdashboard.com/" target="_blank" rel="noopener">Plebdashboard</a>.</span>
+      <span>Ark &amp; Spark on-chain footprint research tracked in <span class="mono">bdl-082</span>.</span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/compare.js"></script>
+</body>
+</html>

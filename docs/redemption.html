@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redemption &amp; Peg Flows — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Cross-chain peg-in and peg-out matching for the Liquid Network: fulfillment latency, 59-day September 2026 payout halt, pending backlog, and recent transactions.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
+
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
+
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-right-left"></i> Exit Liquidity · Cross-Chain Flow Matching</div>
+      <h1 class="page-title">Redemption, Delays &amp; Halts</h1>
+      <p class="page-lead">Every Liquid peg-out matched deterministically to its Bitcoin federation payment. Measures actual redemption latency, queue backlog, and multi-day payout halts.</p>
+    </header>
+
+    <main>
+      <section class="section-block">
+        <div class="kpi-grid" id="redemption-kpis">
+          <div class="kpi-card"><div class="kpi-label">Total Peg-ins</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Total Peg-outs Matched</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Pre-Sep 6 p50 Wait</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Post-Nov 2 p50 Wait</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Redemption Halts &ge;24h</div><div class="kpi-value skeleton">&nbsp;</div></div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel panel-full">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Monthly Peg-In vs. Peg-Out Volume (BTC, 2018–2026)</h2>
+              <p class="panel-subtitle">Cross-chain verified entries (peg-in claims) and exits (peg-out requests)</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-monthly-flows"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">All-Time Peg-Out Delay Distribution</h2>
+              <p class="panel-subtitle">Time from Liquid peg-out block to confirming Bitcoin federation payout block</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-delay-buckets"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">2025–2026 Daily Peg-Out Activity &amp; Backlog</h2>
+              <p class="panel-subtitle">Highlights the 59-day payout stoppage (Sep 6 – Nov 4, 2026) and lower post-restoration cadence</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-recent-pegouts"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Redemption Halt Register (&ge; 24 Hours Without Payout While Requests Waited)</h2>
+              <p class="panel-subtitle">Sorted by halt duration — from <span class="mono">liquid/pegout_halts.parquet</span></p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Redemption Halts" class="table-wrapper">
+            <table class="data-table" id="table-halts">
+              <caption>Redemption halts of 24 hours or longer</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="number">Start (UTC)</th>
+                  <th scope="col" data-type="number">Resumed (UTC)</th>
+                  <th scope="col" data-type="number" class="num">Duration</th>
+                  <th scope="col" data-type="number" class="num">Waiting (#)</th>
+                  <th scope="col" data-type="number" class="num">Waiting (BTC)</th>
+                  <th scope="col" data-type="text">Resuming BTC Payout</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Recent Matched Peg-Outs (Latest 50)</h2>
+              <p class="panel-subtitle">Direct cross-chain proof linking Liquid burn txid to Bitcoin payout txid</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Recent Peg-Outs" class="table-wrapper">
+            <table class="data-table" id="table-recent-pegouts">
+              <caption>Latest 50 Liquid peg-outs</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="number">Date (UTC)</th>
+                  <th scope="col" data-type="number" class="num">BTC</th>
+                  <th scope="col" data-type="number" class="num">Wait</th>
+                  <th scope="col" data-type="text">Liquid TX</th>
+                  <th scope="col" data-type="text">Bitcoin TX</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Recent Peg-Ins (Latest 50)</h2>
+              <p class="panel-subtitle">Bitcoin deposit outpoint matched to Liquid claim transaction (102-block confirmation rule)</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Recent Peg-Ins" class="table-wrapper">
+            <table class="data-table" id="table-recent-pegins">
+              <caption>Latest 50 Liquid peg-ins</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="number">Date (UTC)</th>
+                  <th scope="col" data-type="number" class="num">BTC</th>
+                  <th scope="col" data-type="number" class="num">Claim Delay</th>
+                  <th scope="col" data-type="text">Bitcoin TX</th>
+                  <th scope="col" data-type="text">Liquid TX</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Source: <span class="mono">l2-data v0.1.1</span> (<span class="mono">common/flows.parquet</span>, <span class="mono">liquid/pegout_fulfilment.parquet</span>, <span class="mono">liquid/pegout_halts.parquet</span>).</span>
+      <span><a href="incidents.html">See September 2026 halt forensics &rarr;</a></span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/redemption.js"></script>
+</body>
+</html>

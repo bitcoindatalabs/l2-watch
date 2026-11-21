@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Federation Governance, Signers &amp; Liveness — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Liquid Network DynaFed governance transitions, 14 PAK list versions, 51.9M verified block signatures across three signing regimes, and 1-minute block production liveness.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
+
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
+
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-users-gear"></i> DynaFed Governance · libsecp256k1 Block Signers · Liveness</div>
+      <h1 class="page-title">Federation Governance &amp; Liveness</h1>
+      <p class="page-lead">Every DynaFed epoch transition, peg-out authorization key (PAK) list update, block-signing keyset, and 1-minute producer slot measured across 4,149,999 signed Liquid blocks (51.9 million verified ECDSA signatures).</p>
+    </header>
+
+    <div class="callout callout-warn" role="note">
+      <div class="callout-icon"><i class="fa-solid fa-circle-info"></i></div>
+      <div class="callout-body">
+        <strong>Signature Share Is Not Uptime (Three Software Signing Regimes)</strong>
+        <p>Every Liquid block carries exactly 11 of 15 signatures, chosen deterministically by software across three regimes: <strong>2018–Jun 2021</strong> (11 lowest positions excluding producer), <strong>Jun 2021–May 2025</strong> (11 lowest online keys — same set nearly every block), and <strong>Jun 2025–present</strong> (producer signs its own block + 10 others). Producer attribution below is clearly tagged <span class="vbadge vbadge-inferred">Inferred</span>.</p>
+      </div>
+    </div>
+
+    <main>
+      <section class="section-block">
+        <div class="kpi-grid" id="fed-kpis">
+          <div class="kpi-card"><div class="kpi-label">Signed Blocks Verified</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Missed 1-Min Slots</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">DynaFed Transitions</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">PAK List Versions</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Halts &ge; 1 Hour</div><div class="kpi-value skeleton">&nbsp;</div></div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel panel-full">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Monthly Block Production &amp; Missed 1-Minute Slots (2018–2026)</h2>
+              <p class="panel-subtitle">Percentage of 1-minute slots filled vs. missed slots per month (includes the 79.2h Sep 2026 halt, 22.7h Aug 2019 halt, and 22.2h Oct 2021 DynaFed halt)</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-liveness"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Current Keyset (<span class="mono">signblock_2026_07</span>) Slot Fill Rate</h2>
+              <p class="panel-subtitle">15 round-robin 1-minute slots (<span class="mono">minute mod 15</span>) with inferred producer key</p>
+            </div>
+            <div><span class="vbadge vbadge-inferred">Inferred Producer</span></div>
+          </div>
+          <div class="chart-canvas" id="chart-slots"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">PAK List Size Evolution (14 Versions)</h2>
+              <p class="panel-subtitle">Authorized peg-out member entries across pre-DynaFed coinbase commitments and DynaFed epochs</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-pak"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">DynaFed Governance Transitions (8 Adopted Changes)</h2>
+              <p class="panel-subtitle">Every adopted DynaFed parameter vote from <span class="mono">dynafed_transitions.parquet</span> — voting margin (threshold 16,128 blocks), key diffs, and Bitcoin reserve sweep times</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="DynaFed Governance Transitions" class="table-wrapper">
+            <table class="data-table" id="table-transitions">
+              <caption>DynaFed governance transitions</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Transition</th>
+                  <th scope="col" data-type="number">Adopted (UTC)</th>
+                  <th scope="col" data-type="number" class="num">Liquid Height</th>
+                  <th scope="col" data-type="text">Changes</th>
+                  <th scope="col" data-type="number" class="num">Deciding Votes</th>
+                  <th scope="col" data-type="number" class="num">Days to Adoption</th>
+                  <th scope="col" data-type="number" class="num">Old Reserve &lt;1 BTC</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Block Production Gaps (&ge; 10 Minutes)</h2>
+              <p class="panel-subtitle">All 22 gaps of 10 minutes or longer since genesis (<span class="mono">liquid/block_gaps.parquet</span>)</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Liquid Block Gaps" class="table-wrapper">
+            <table class="data-table" id="table-gaps">
+              <caption>Liquid block gaps 10 minutes or longer</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="number">Resumed (UTC)</th>
+                  <th scope="col" data-type="number" class="num">Liquid Height</th>
+                  <th scope="col" data-type="number" class="num">Gap Duration</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">All Federation Keysets (Custody &amp; Block Signing)</h2>
+              <p class="panel-subtitle">Complete history of 11-of-15 signing and custody key rotations (<span class="mono">federation_keysets.parquet</span>)</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Federation Keysets" class="table-wrapper">
+            <table class="data-table" id="table-keysets">
+              <caption>Federation keysets history</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Keyset</th>
+                  <th scope="col" data-type="text">Role</th>
+                  <th scope="col" data-type="text">Threshold</th>
+                  <th scope="col" data-type="number" class="num">First Height</th>
+                  <th scope="col" data-type="text">Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Sources: <span class="mono">bdl-076</span> DynaFed governance &amp; <span class="mono">bdl-077</span> libsecp256k1 block-signer audit (Liquid cutoff height 4,149,999).</span>
+      <span><a href="methods.html">Methodology &amp; Verification Classes &rarr;</a></span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/federation.js"></script>
+</body>
+</html>

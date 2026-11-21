@@ -1,38 +1,37 @@
-// Centralized app configuration for L2 Watch
+// Centralized Bitcoin Data Labs shell configuration for L2 Watch
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof BitcoinLabsApp !== 'undefined') {
         BitcoinLabsApp.init({
             isApp: true,
-            appName: "L2 Watch",
-            appHomeUrl: "https://sorukumar.github.io/l2-watch/",
+            appName: 'L2 Watch',
+            appHomeUrl: 'index.html',
+            suiteName: 'L2 Suite',
             navLinks: [
-                { name: 'Network Activity', url: 'index.html' },
-                { name: 'Reserve Proof', url: 'reserve.html' },
-                { name: 'Security & Health', url: 'health.html' },
-                { name: 'Audit Trail', url: 'audit.html' }
+                { name: 'Scorecard', url: 'index.html' },
+                { name: 'Reserves', url: 'reserve.html' },
+                { name: 'Redemption', url: 'redemption.html' },
+                { name: 'Incidents', url: 'incidents.html' },
+                { name: 'Federation', url: 'federation.html' },
+                { name: 'Privacy & Fees', url: 'usage.html' },
+                { name: 'Assets', url: 'assets.html' },
+                { name: 'Methods', url: 'methods.html' },
+                { name: 'Compare', url: 'compare.html' }
             ],
             suiteLinks: [
-                { name: 'Liquid (Current)', url: '#', icon: 'fa-solid fa-water' },
-                { name: 'Spark (Coming Soon)', url: '#', icon: 'fa-solid fa-bolt' },
-                { name: 'RGB (Coming Soon)', url: '#', icon: 'fa-solid fa-palette' },
-                { name: 'Botanix (Coming Soon)', url: '#', icon: 'fa-brands fa-pagelines' }
+                { name: 'Liquid Network Audit', url: 'index.html', icon: 'fa-solid fa-water' },
+                { name: 'Compare Bitcoin L2s', url: 'compare.html', icon: 'fa-solid fa-scale-balanced' },
+                { name: 'Plebdashboard (Lightning)', url: 'https://plebdashboard.com/', icon: 'fa-solid fa-bolt' },
+                { name: 'l2-data Repo (GitHub)', url: 'https://github.com/bitcoindatalabs/l2-data', icon: 'fa-brands fa-github' },
+                { name: 'Zenodo DOI Archive', url: 'https://doi.org/10.5281/zenodo.24429493', icon: 'fa-solid fa-book-bookmark' }
+            ],
+            footerLinks: [
+                { name: 'l2-data v0.1.1 (GitHub)', url: 'https://github.com/bitcoindatalabs/l2-data' },
+                { name: 'Zenodo DOI', url: 'https://doi.org/10.5281/zenodo.24429493' },
+                { name: 'Methods & Invariants', url: 'methods.html' },
+                { name: 'Bitcoin Data Labs', url: 'https://bitcoindatalabs.org/' }
             ]
         });
-
-        // Override the hardcoded "orange-dev-suite" label in the injected dropdown
-        const updateDropdownLabel = () => {
-            const summary = document.querySelector('.bdl-suite-summary');
-            // Check if it exists and contains the default text
-            if (summary && summary.innerHTML.includes('orange-dev-suite')) {
-                summary.innerHTML = '<i class="fa-solid fa-water" style="margin-right: 4px;"></i> Liquid Network <i class="fas fa-chevron-down" style="font-size: 0.7em; opacity: 0.7; margin-left: 4px;"></i>';
-                summary.style.background = 'var(--accent-btc, #f7931a)';
-                summary.style.color = '#fff';
-            } else if (!summary) {
-                setTimeout(updateDropdownLabel, 100);
-            }
-        };
-        updateDropdownLabel();
     } else {
-        console.error("BitcoinLabsApp is not defined. Ensure app-components.js is loaded.");
+        console.error('BitcoinLabsApp is not defined.');
     }
 });

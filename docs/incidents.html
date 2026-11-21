@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incidents &amp; September 2026 Case Study — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Chain-verified forensic timeline of the September–November 2026 Liquid reserve shortfall, 4,006.81 BTC unexplained outflows, 3,400 BTC return trace, and complete 20-incident register.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
+
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
+
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-bolt"></i> Forensic Register · Chain Facts Only</div>
+      <h1 class="page-title">Incidents &amp; September 2026 Case Study</h1>
+      <p class="page-lead">Every measured reserve shortfall, unexplained custody outflow, emergency timelock spend, and multi-day redemption or block-production halt from 2018 through November 2026 — linked directly to on-chain transactions.</p>
+    </header>
+
+    <div class="callout callout-danger" role="note">
+      <div class="callout-icon"><i class="fa-solid fa-shield-virus"></i></div>
+      <div class="callout-body">
+        <strong>September–November 2026 Empirical Summary (Bitcoin Blocks 964,990 – 974,548)</strong>
+        <p>On Sep 6, 2026, two 11-of-15 federation transactions paid <strong>4,006.81 BTC</strong> to four addresses with no Liquid peg-out request, dropping verified backing from <strong>100.61%</strong> to <strong>5.30%</strong> (222.79 BTC vs. 4,205.02 L-BTC). 3,404 BTC traced back on Sep 7–9 (598.50 BTC remains unmoved at the recipient address), and 602.53 BTC from unrelated external wallets restored 1:1 backing on Nov 2 after <strong>57.32 days</strong> under-collateralized. No custody key rotation occurred through cutoff.</p>
+      </div>
+    </div>
+
+    <main>
+      <section class="section-block">
+        <div class="kpi-grid" id="inc-kpis">
+          <div class="kpi-card accent-danger"><div class="kpi-label">Unexplained Outflows</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-danger"><div class="kpi-label">Max Reserve Shortfall</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-gold"><div class="kpi-label">Days Below 1:1 Backing</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-pass"><div class="kpi-label">Traced Returns / Fresh Inflows</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-cool"><div class="kpi-label">Total Logged Incidents</div><div class="kpi-value skeleton">&nbsp;</div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Block-Resolution Reserve Collapse &amp; Restoration (Aug 25 – Nov 17, 2026)</h2>
+              <p class="panel-subtitle">Exact Bitcoin block snapshots from <span class="mono">reserve_by_block.parquet</span> showing the Sep 6 trough (222.79 BTC), Sep 7 return (+3,400 BTC), and Oct 27–Nov 2 external restoration (+602.53 BTC)</p>
+            </div>
+          </div>
+          <div class="chart-canvas chart-tall" id="chart-sep-case"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">September–November 2026 Chronology (Chain-Verified Milestones)</h2>
+              <p class="panel-subtitle">Strict chain observations — no attribution of off-chain intent or identity</p>
+            </div>
+          </div>
+          <div class="timeline" id="sep-timeline"></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Unexplained Federation Outflows (All-Time: 5 Outputs, 4,010.02 BTC)</h2>
+              <p class="panel-subtitle">External Bitcoin outputs paid from federation custody with no matching Liquid peg-out request (<span class="mono">liquid/unexplained_outflows.parquet</span>)</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Unexplained Outflows" class="table-wrapper">
+            <table class="data-table" id="table-unexplained">
+              <caption>All 5 unexplained federation outflows</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="number">Date (UTC)</th>
+                  <th scope="col" data-type="number" class="num">BTC Height</th>
+                  <th scope="col" data-type="text">Bitcoin Outpoint</th>
+                  <th scope="col" data-type="number" class="num">Amount (BTC)</th>
+                  <th scope="col" data-type="text">Spend Path</th>
+                  <th scope="col" data-type="text">Script Type</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Complete Incident Register (2018–2026 · 20 Entries)</h2>
+              <p class="panel-subtitle">Direct output of <span class="mono">common/incidents.parquet</span> including the 2018–2020 change-script timelock lapse, emergency spend, shortfalls, and halts</p>
+            </div>
+            <div class="panel-controls">
+              <select id="inc-kind-filter" class="l2-select" aria-label="Filter incident type">
+                <option value="all">All Kinds</option>
+              </select>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Complete Incident Register" class="table-wrapper">
+            <table class="data-table" id="table-incidents">
+              <caption>Complete 20-entry incident register</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="number">Start (UTC)</th>
+                  <th scope="col" data-type="text">Kind</th>
+                  <th scope="col" data-type="number" class="num">Duration</th>
+                  <th scope="col" data-type="number" class="num">Magnitude (BTC)</th>
+                  <th scope="col" data-type="text">Verification</th>
+                  <th scope="col" data-type="text">Evidence TXIDs</th>
+                  <th scope="col" data-type="text">Detection Rule / Method</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Source: <span class="mono">l2-data v0.1.1</span> (<span class="mono">common/incidents.parquet</span>, <span class="mono">liquid/unexplained_outflows.parquet</span>, <span class="mono">liquid/reserve_by_block.parquet</span>).</span>
+      <span>Cited in Bitcoin Data Labs public comment to Federal Reserve Docket No. R-1899.</span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/incidents.js"></script>
+</body>
+</html>

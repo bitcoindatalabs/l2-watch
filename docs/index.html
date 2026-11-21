@@ -1,157 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L2 Watch</title>
-    <!-- Bitcoin Data Labs styles -->
-    <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L2 Watch — Cross-Chain Bitcoin L2 Audit | Bitcoin Data Labs</title>
+  <meta name="description" content="Independent, cross-chain empirical audit of the Liquid Network and Bitcoin Layer 2 systems. Verified reserves, emergency timelock exposure, redemption halts, and September 2026 forensics.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 </head>
-<body class="has-fixed-header">
-    <!-- Bitcoin Data Labs Header -->
-    <div id="header"></div>
-    <div class="main-content container">
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
 
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
 
-        <style>
-            .data-table { width: 100%; border-collapse: collapse; color: var(--text-secondary); font-size: 0.9rem; }
-            .data-table th { text-align: left; padding: 0.75rem; border-bottom: 1px solid var(--border-color); color: var(--text-primary); }
-            .data-table td { padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-family: monospace; }
-        </style>
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-water"></i> Liquid Network · Cross-Chain Empirical Audit</div>
+      <h1 class="page-title">L2 Watch Scorecard</h1>
+      <p class="page-lead">Every promise of the Liquid federated sidechain tested independently against both the Bitcoin and Liquid blockchains from genesis (2018) through cutoff. Chain facts only — zero operator self-reporting.</p>
+    </header>
 
-        <main>
-            <!-- Network Activity Tab -->
-            <div id="tab-network">
-                <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                    <div class="kpi-card">
-                        <div class="kpi-label">Total Transactions</div>
-                        <div class="kpi-value skeleton" id="kpi-total-tx"></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Total Registered Assets</div>
-                        <div class="kpi-value skeleton" id="kpi-total-assets"></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Avg TX Fee (Last Month)</div>
-                        <div class="kpi-value skeleton" id="kpi-avg-fee"></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Current CT Rate</div>
-                        <div class="kpi-value skeleton" id="kpi-ct-rate"></div>
-                    </div>
-                </div>
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Monthly Transactions</h2>
-                            <div class="chart-subtitle">Total transactions processed per month</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-tx-count">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Confidential Transaction Adoption</h2>
-                            <div class="chart-subtitle">% of transactions using blinded outputs over time</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-ct-rate">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Monthly Network Fees</h2>
-                            <div class="chart-subtitle">Total fees (L-BTC) and Avg Fee per TX (sats)</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-fees">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Network Data Volume</h2>
-                            <div class="chart-subtitle">Total blockspace consumed (vBytes)</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-volume">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Asset Issuance</h2>
-                            <div class="chart-subtitle">Monthly count of new asset issuances</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-issuance">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">UTXO Bloat</h2>
-                            <div class="chart-subtitle">Inputs vs Outputs</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-utxo">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Federation Signer Participation</h2>
-                            <div class="chart-subtitle">Block proposal count by functionary address</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-federation-participation">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Asset Transfer Volume</h2>
-                            <div class="chart-subtitle">Monthly volume of top registered assets</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-asset-volume">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Asset Transaction Count</h2>
-                            <div class="chart-subtitle">Monthly transactions involving top assets</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-asset-tx-count">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Privacy Cost Analysis</h2>
-                            <div class="chart-subtitle">Average fee paid for Confidential vs Public transactions</div>
-                        </div>
-                        <div class="chart-canvas" id="chart-privacy-cost">
-                            <div class="skeleton" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <div class="dashboard-footer">
-            <p>Data provided by local L2 nodes & Bitcoin Core verification. Data is updated daily.</p>
-        </div>
+    <div class="callout callout-warn" role="note">
+      <div class="callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="callout-body">
+        <strong>September–November 2026 Reserve Shortfall &amp; Redemption Halt Verified on Both Chains</strong>
+        <p>Between Sep 6 and Nov 2, 2026, Bitcoin reserves sat below L-BTC supply for <strong>57.32 days</strong> (trough: <strong>5.30%</strong> backing, −3,982.22 BTC), direct peg-out payouts stopped for <strong>59 days</strong>, and Liquid halted block production for <strong>79.2 hours</strong>. Backing returned to 100.15% on Nov 2 via fresh external inflows without a custody key rotation. <a href="incidents.html">Inspect the September 2026 Case Study &rarr;</a></p>
+      </div>
     </div>
 
-    <!-- Bitcoin Data Labs Footer -->
-    <div id="footer"></div>
+    <main>
+      <section class="section-block" aria-label="Headline audit metrics">
+        <div class="kpi-grid kpi-grid-3" id="scorecard-kpis">
+          <div class="kpi-card accent-pass"><div class="kpi-label">Verified BTC Reserve</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-gold"><div class="kpi-label">L-BTC Circulating Supply</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-pass"><div class="kpi-label">Backing Ratio (Cutoff)</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-danger"><div class="kpi-label">Historical Low Backing</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-danger"><div class="kpi-label">Longest Redemption Halt</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-cool"><div class="kpi-label">Custody Control</div><div class="kpi-value skeleton">&nbsp;</div></div>
+        </div>
+      </section>
 
-    <!-- Bitcoin Data Labs App Components -->
-    <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
-    <!-- App Configuration -->
-    <script src="js/app-config.js"></script>
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Verified Bitcoin Reserve vs. L-BTC Supply (2018–2026)</h2>
+              <p class="panel-subtitle">Unspent federation custody UTXOs on Bitcoin L1 vs. cumulative peg-ins minus peg-outs and explicit burns on Liquid</p>
+            </div>
+            <div class="panel-controls">
+              <div class="btn-group" id="sc-range-btns" role="group" aria-label="Time range">
+                <button type="button" class="btn-seg active" data-range="all">All Time</button>
+                <button type="button" class="btn-seg" data-range="2026">2026</button>
+                <button type="button" class="btn-seg" data-range="incident">Aug–Nov 2026</button>
+              </div>
+              <a href="reserve.html" class="vbadge vbadge-l2" style="text-decoration:none;">Explore Reserves &rarr;</a>
+            </div>
+          </div>
+          <div class="chart-canvas chart-tall" id="chart-scorecard-backing">
+            <div class="skeleton" style="width:100%;height:100%;"></div>
+          </div>
+        </div>
+      </section>
 
-    <script src="js/app.js"></script>
+      <section class="section-block" aria-label="Audit pillars">
+        <div class="pillar-grid" id="scorecard-pillars"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Complete Audit Scorecard (26 Cross-Chain Metrics)</h2>
+              <p class="panel-subtitle">Direct output of <span class="mono">common/scorecard.parquet</span> in <span class="mono">l2-data v0.1.1</span> — every metric carries its verification class and source table</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Complete Audit Scorecard" class="table-wrapper">
+            <table class="data-table" id="table-scorecard">
+              <caption>Complete 26-metric Liquid Network scorecard</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Metric</th>
+                  <th scope="col" data-type="text">Window</th>
+                  <th scope="col" data-type="text" class="num">Measured Value</th>
+                  <th scope="col" data-type="text">Verification</th>
+                  <th scope="col" data-type="text">Description</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Published by <a href="https://bitcoindatalabs.org/" target="_blank" rel="noopener">Bitcoin Data Labs</a> (501(c)(3)). Built strictly from public Bitcoin &amp; Liquid chain data.</span>
+      <span>Archival snapshot: <a href="https://doi.org/10.5281/zenodo.24429493" target="_blank" rel="noopener">doi:10.5281/zenodo.24429493</a></span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/scorecard.js"></script>
 </body>
 </html>

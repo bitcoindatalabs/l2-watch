@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy, Proofs &amp; Peg Economics — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Confidential Transaction adoption, 84.5% cryptographic proof byte overhead, UTXO set growth, hidden-amount burns, and Liquid federation peg economics.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
+
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
+
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-eye-slash"></i> Confidential Transactions · Chain Weight · Fee Economics</div>
+      <h1 class="page-title">Usage, Privacy &amp; Economics</h1>
+      <p class="page-lead">Full-history telemetry of Confidential Transactions (CT), cryptographic proof space cost, hidden-amount burns, UTXO bloat, and Bitcoin L1 custody fees vs. L-BTC network fees.</p>
+    </header>
+
+    <main>
+      <section class="section-block">
+        <div class="kpi-grid" id="usage-kpis">
+          <div class="kpi-card"><div class="kpi-label">Non-Coinbase TXs</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Fully Confidential TXs</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Proof Share of Chain</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Hidden-Amount Burns</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">L1 Custody Fees vs. L-BTC Fees</div><div class="kpi-value skeleton">&nbsp;</div></div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Monthly Transactions &amp; CT Adoption Rate</h2>
+              <p class="panel-subtitle">Total non-coinbase transactions and % blinding every value-carrying output</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-tx-ct"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Cryptographic Proof Cost (MB / Month)</h2>
+              <p class="panel-subtitle">Rangeproofs (73.2 GB) + surjection proofs vs. non-proof block data across 89.0 GB of blocks</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-proof-bytes"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Liquid UTXO Set Growth (Blinded vs. Explicit)</h2>
+              <p class="panel-subtitle">Unspent output count at month-end — fee-payee coinbase change dominated explicit UTXOs until 2022</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-utxo-set"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Peg Economics: Cumulative Bitcoin Fees vs. L-BTC Fees</h2>
+              <p class="panel-subtitle">Bitcoin fees paid from federation custody vs. L-BTC fees collected by the fee payee</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-peg-econ"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Hidden-Amount Burns by Year (<span class="mono">OP_RETURN</span> with Blinded Value)</h2>
+              <p class="panel-subtitle">Because these outputs blind their value, L-BTC circulating supply (<span class="mono">peg-ins − peg-outs − explicit burns</span>) is strictly an upper bound</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Hidden Burns by Year" class="table-wrapper">
+            <table class="data-table" id="table-hidden-burns">
+              <caption>Hidden-amount burn outputs by year</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="number">Year</th>
+                  <th scope="col" data-type="number" class="num">Total Hidden-Amount Burns</th>
+                  <th scope="col" data-type="number" class="num">Asset Also Blinded</th>
+                  <th scope="col" data-type="number" class="num">Explicit Asset (L-BTC)</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Source: <span class="mono">bdl-078</span> (<span class="mono">ct_daily.parquet</span>, <span class="mono">ct_hidden_burns.parquet</span>, <span class="mono">peg_economics_daily.parquet</span>) at cutoff Liquid #4,148,532.</span>
+      <span>Blinded amounts are never estimated; explicit sums are labeled as lower/upper bounds.</span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/usage.js"></script>
+</body>
+</html>

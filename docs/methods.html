@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methods &amp; Live Invariants — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Audit methodology, exact Bitcoin and Liquid cutoff heights, verification classes, all 78 passing cross-chain invariants, and Zenodo archival citation for l2-data v0.1.1.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
+
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
+
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-shield-halved"></i> Reproducibility · Verification Classes · Automated Invariants</div>
+      <h1 class="page-title">Methods &amp; Live Invariants</h1>
+      <p class="page-lead">Every chart and number on L2 Watch is derived deterministically from open Parquet tables in <span class="mono">bitcoindatalabs/l2-data</span> and verified against 78 automated cross-chain invariants before release.</p>
+    </header>
+
+    <div class="callout callout-pass" id="methods-banner" role="status">
+      <div class="callout-icon"><i class="fa-solid fa-circle-check"></i></div>
+      <div class="callout-body">
+        <strong id="methods-status-headline">Loading validation status…</strong>
+        <p id="methods-status-sub">Reading <span class="mono">metadata/validation.json</span> and <span class="mono">metadata/release.json</span>.</p>
+      </div>
+    </div>
+
+    <main>
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Verification Class Taxonomy</h2>
+              <p class="panel-subtitle">Every published metric carries an explicit provenance class from <span class="mono">metadata/verification_classes.json</span></p>
+            </div>
+          </div>
+          <div class="kpi-grid" id="vclass-grid" style="margin-bottom:0;"></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Automated Invariant Suite (<span id="inv-count">78</span> Checks)</h2>
+              <p class="panel-subtitle">Live export of <span class="mono">l2-data/metadata/validation.json</span> — the exporter refuses to write any release unless zero checks fail</p>
+            </div>
+            <div class="panel-controls">
+              <input type="search" id="inv-search" class="l2-input" placeholder="Filter group or check…" aria-label="Filter invariants">
+              <select id="inv-group-filter" class="l2-select" aria-label="Filter by group">
+                <option value="all">All Groups</option>
+              </select>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Automated Invariant Checks" class="table-wrapper">
+            <table class="data-table" id="table-invariants">
+              <caption>All automated cross-chain invariant checks</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Group</th>
+                  <th scope="col" data-type="text">Check</th>
+                  <th scope="col" data-type="text">Status</th>
+                  <th scope="col" data-type="text">Measured Detail</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Published Parquet Tables (<span class="mono">l2-data v0.1.1</span>)</h2>
+              <p class="panel-subtitle">SHA-256 verified files available on GitHub and Zenodo</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Published Parquet Tables" class="table-wrapper">
+            <table class="data-table" id="table-files">
+              <caption>Published Parquet files in l2-data v0.1.1</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Path</th>
+                  <th scope="col" data-type="number" class="num">Rows</th>
+                  <th scope="col" data-type="number" class="num">Size</th>
+                  <th scope="col" data-type="text">SHA-256</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Archival Citation (BibTeX &amp; Zenodo DOI)</h2>
+              <p class="panel-subtitle">Permanent archival snapshot minted on Zenodo with ORCID provenance</p>
+            </div>
+          </div>
+          <pre class="code-block" id="citation-block">@dataset{kumar_2026_l2data_v011,
+  author       = {Kumar, Saurabh},
+  title        = {{Bitcoin Data Labs L2 Audit Dataset (l2-data v0.1.1):
+                   Cross-Chain Liquid Network Custody, Reserves,
+                   Redemption, and Incidents (2018-2026)}},
+  month        = nov,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {v0.1.1},
+  doi          = {10.5281/zenodo.24429493},
+  url          = {https://doi.org/10.5281/zenodo.24429493}
+}</pre>
+          <p style="margin-top:14px;font-size:0.84rem;color:var(--text-secondary);">
+            All-versions Concept DOI: <a href="https://doi.org/10.5281/zenodo.24429492" target="_blank" rel="noopener" style="color:var(--primary);">10.5281/zenodo.24429492</a> ·
+            Full methodology &amp; data dictionary: <a href="https://github.com/bitcoindatalabs/l2-data/blob/main/METHODS.md" target="_blank" rel="noopener" style="color:var(--primary);">METHODS.md</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Methodology follows strict chain-facts-only reporting (no off-chain attribution or estimated blinded amounts).</span>
+      <span><a href="https://github.com/bitcoindatalabs/l2-data" target="_blank" rel="noopener">Inspect code &amp; SHA256SUMS on GitHub &rarr;</a></span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/methods.js"></script>
+</body>
+</html>

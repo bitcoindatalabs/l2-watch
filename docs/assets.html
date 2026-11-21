@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assets &amp; USDt Issuance — L2 Watch | Bitcoin Data Labs</title>
+  <meta name="description" content="Complete Liquid Network asset issuance ledger: 356,037 issued assets, USDt explicit upper-bound supply (97.56M), tracked stablecoins &amp; mining notes, and ticker collisions.">
+  <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://bitcoindatalabs.org/styles/styles.css" onerror="this.onerror=null;this.href='https://sorukumar.github.io/Bitcoin-Data-Labs/styles/styles.css'">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body class="has-fixed-header has-sub-nav">
+  <div id="header"></div>
+
+  <div class="l2-container">
+    <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
+
+    <header class="page-header">
+      <div class="page-eyebrow"><i class="fa-solid fa-coins"></i> Issued Assets · Tether USDt · Registry Audit</div>
+      <h1 class="page-title">Assets &amp; USDt Ledger</h1>
+      <p class="page-lead">Every asset issuance, reissuance, and explicit burn on Liquid from genesis through block 4,148,532, cryptographically bound to Blockstream's asset registry by contract hash.</p>
+    </header>
+
+    <main>
+      <section class="section-block">
+        <div class="kpi-grid" id="assets-kpis">
+          <div class="kpi-card"><div class="kpi-label">Total Issued Assets</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">USDt Upper Bound</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Single-Unit (No Token)</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Registry-Bound Assets</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card"><div class="kpi-label">Duplicate Tickers</div><div class="kpi-value skeleton">&nbsp;</div></div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Tether USDt on Liquid — Explicit Upper Bound</h2>
+              <p class="panel-subtitle">Asset <span class="mono">ce091c99…</span> (<span class="mono">tether.to</span>) — 97,561,600 issued explicitly minus 500 burned; transfers move blinded so circulation &le; 97.56M</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-usdt"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">New Asset Issuances by Year</h2>
+              <p class="panel-subtitle">Single-unit non-reissuable assets (84.2% overall, often minted 100 per tx since 2023) vs. multi-unit &amp; registered assets</p>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-asset-years"><div class="skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Tracked Assets (Stablecoins, Exchange Tokens &amp; Mining Notes)</h2>
+              <p class="panel-subtitle">Explicit issuance minus explicit burns — upper bound when confidential burns cannot be ruled out</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Tracked Assets" class="table-wrapper">
+            <table class="data-table" id="table-tracked">
+              <caption>Tracked Liquid assets</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Ticker</th>
+                  <th scope="col" data-type="text">Name / Domain</th>
+                  <th scope="col" data-type="number" class="num">Issued (Explicit)</th>
+                  <th scope="col" data-type="number" class="num">Burned (Explicit)</th>
+                  <th scope="col" data-type="number" class="num">Upper Bound</th>
+                  <th scope="col" data-type="number" class="num">Reissuances</th>
+                  <th scope="col" data-type="number" class="num">Explicit TXs</th>
+                  <th scope="col" data-type="text">Asset ID</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Top Active Registered Assets</h2>
+              <p class="panel-subtitle">Filterable by ticker, name, or issuer domain</p>
+            </div>
+            <div class="panel-controls">
+              <input type="search" id="asset-search" class="l2-input" placeholder="Search ticker or domain…" aria-label="Search registered assets">
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Top Registered Assets" class="table-wrapper">
+            <table class="data-table" id="table-registered">
+              <caption>Top active registered assets on Liquid</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Ticker</th>
+                  <th scope="col" data-type="text">Domain</th>
+                  <th scope="col" data-type="number" class="num">Explicit TXs</th>
+                  <th scope="col" data-type="number" class="num">Reissuances</th>
+                  <th scope="col" data-type="text">Asset ID</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Duplicate Ticker Collisions (60 Tickers)</h2>
+              <p class="panel-subtitle">Tickers are not unique on Liquid — including a spoof <span class="mono">USDt</span> on <span class="mono">tether.rip</span> (21M units)</p>
+            </div>
+          </div>
+          <div tabindex="0" role="region" aria-label="Duplicate Tickers" class="table-wrapper">
+            <table class="data-table" id="table-dups">
+              <caption>Tickers shared by multiple Liquid assets</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-type="text">Ticker</th>
+                  <th scope="col" data-type="number" class="num">Distinct Assets</th>
+                  <th scope="col" data-type="text">Issuer Domains</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-note">
+      <span>Source: <span class="mono">bdl-078</span> (<span class="mono">assets.parquet</span>, <span class="mono">asset_daily.parquet</span>, registry commit <span class="mono">1de24c44</span>).</span>
+      <span>Every registry entry is bound to its on-chain issuance by contract hash.</span>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="https://bitcoindatalabs.org/components/app-components.js" onerror="this.onerror=null;this.src='https://sorukumar.github.io/Bitcoin-Data-Labs/components/app-components.js'"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/assets.js"></script>
+</body>
+</html>
