@@ -357,7 +357,7 @@ def build_redemption(con: duckdb.DuckDBPyConnection) -> dict:
         f"""
         SELECT count(*), round(median(delay_s), 1), round(quantile_cont(delay_s, 0.95), 1)
         FROM read_parquet('{L2_DATA}/liquid/pegout_fulfilment.parquet')
-        WHERE btc_time >= 1793657040 AND status IN ('completed', 'matched', 'paid')
+        WHERE liquid_time >= 1793657040 AND status IN ('completed', 'matched', 'paid')
         """
     ).fetchone()
 
@@ -734,6 +734,7 @@ def build_usage_privacy(con: duckdb.DuckDBPyConnection) -> dict:
                max(utxo_blinded) AS utxo_blinded,
                max(utxo_explicit) AS utxo_explicit
         FROM read_parquet('{AUDIT_DIR}/ct_daily.parquet')
+        WHERE CAST(utc_day AS VARCHAR) >= '2018-09-01'
         GROUP BY 1
         ORDER BY 1
         """,

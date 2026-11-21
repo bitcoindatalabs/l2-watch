@@ -876,3 +876,243 @@ th[aria-sort="descending"] .sort-indicator::after {
 
 @media (max-width: 900px) { .pillar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .pillar-grid { grid-template-columns: 1fr; } }
+
+/* ── Homepage 6-Question L2 Narrative Styles ── */
+.qa-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 860px) {
+  .qa-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.qa-card {
+  background: var(--bg-secondary, #0d0f14);
+  border: 1px solid var(--border, rgba(253, 246, 227, 0.08));
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.18s ease;
+}
+
+.qa-card:hover {
+  border-color: rgba(232, 145, 107, 0.35);
+}
+
+.qa-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.qa-num {
+  font-family: var(--bdl-font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--primary, #e8916b);
+  letter-spacing: 0.08em;
+}
+
+.qa-question {
+  margin: 2px 0 4px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-primary, #fdf6e3);
+  line-height: 1.3;
+}
+
+.qa-promise,
+.qa-reality {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--text-secondary, #94a3b8);
+  line-height: 1.48;
+}
+
+.qa-promise strong,
+.qa-reality strong {
+  color: var(--text-primary, #fdf6e3);
+  font-weight: 600;
+}
+
+.qa-foot {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border, rgba(253, 246, 227, 0.07));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.qa-link {
+  color: var(--primary, #e8916b);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.qa-link:hover {
+  text-decoration: underline;
+}
+
+.chart-takeaway {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border, rgba(253, 246, 227, 0.07));
+  font-size: 0.82rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.chart-takeaway strong {
+  color: var(--text-primary, #fdf6e3);
+}
+
+.chart-takeaway a {
+  color: var(--primary, #e8916b);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.chart-takeaway a:hover {
+  text-decoration: underline;
+}
+
+/* 3-Column 8-Year Stress Events Strip */
+.stress-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .stress-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stress-card {
+  background: var(--bg-secondary, #0d0f14);
+  border: 1px solid var(--border, rgba(253, 246, 227, 0.08));
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stress-card-danger {
+  border-color: rgba(239, 68, 68, 0.28);
+}
+
+.stress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stress-card h3 {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--text-primary, #fdf6e3);
+}
+
+.stress-card p {
+  margin: 0 0 auto;
+  font-size: 0.84rem;
+  color: var(--text-secondary, #94a3b8);
+  line-height: 1.48;
+}
+
+.stress-card p strong {
+  color: var(--text-primary, #fdf6e3);
+}
+
+/* Compact Multi-L2 Comparison Strip */
+.compare-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 960px) {
+  .compare-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .compare-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+.compare-mini {
+  background: var(--bg-secondary, #0d0f14);
+  border: 1px solid var(--border, rgba(253, 246, 227, 0.08));
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.compare-mini.is-planned {
+  border-style: dashed;
+  opacity: 0.8;
+}
+
+.compare-mini-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--text-primary, #fdf6e3);
+  font-size: 0.9rem;
+}
+
+.compare-mini-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary, #e8916b);
+  font-variant-numeric: tabular-nums;
+}
+
+.compare-mini-meta {
+  font-size: 0.78rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.compare-mini-meta strong {
+  color: var(--text-primary, #fdf6e3);
+}
+
+/* Collapsible Details Reference Panel */
+.details-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.details-summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-panel[open] .details-toggle-pill i {
+  transform: rotate(180deg);
+}

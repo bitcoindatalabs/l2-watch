@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>L2 Watch — Cross-Chain Bitcoin L2 Audit | Bitcoin Data Labs</title>
-  <meta name="description" content="Independent, cross-chain empirical audit of the Liquid Network and Bitcoin Layer 2 systems. Verified reserves, emergency timelock exposure, redemption halts, and September 2026 forensics.">
+  <title>L2 Watch — Independent Bitcoin Layer 2 Audit | Bitcoin Data Labs</title>
+  <meta name="description" content="Independent cross-chain empirical audit of Bitcoin Layer 2 systems, starting with the Liquid Network (2018–2026): 1:1 backing, custody control, exit liquidity, 8-year liveness, privacy costs, assets, and historical resilience.">
   <link rel="icon" type="image/png" href="https://bitcoindatalabs.org/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,82 +20,144 @@
   <div class="l2-container">
     <div id="provenance-bar" class="provenance-bar">Loading audit provenance…</div>
 
+    <!-- ACT 1: ORIENTATION & 6 FUNDAMENTAL L2 VITAL SIGNS -->
     <header class="page-header">
-      <div class="page-eyebrow"><i class="fa-solid fa-water"></i> Liquid Network · Cross-Chain Empirical Audit</div>
-      <h1 class="page-title">L2 Watch Scorecard</h1>
-      <p class="page-lead">Every promise of the Liquid federated sidechain tested independently against both the Bitcoin and Liquid blockchains from genesis (2018) through cutoff. Chain facts only — zero operator self-reporting.</p>
+      <div class="page-eyebrow"><i class="fa-solid fa-water"></i> Bitcoin Layer 2 Audit · Liquid Network (2018–2026)</div>
+      <h1 class="page-title">How Does Liquid Actually Hold Up on Both Chains?</h1>
+      <p class="page-lead">When evaluating any Bitcoin Layer 2, six questions matter: <strong>is it backed 1:1</strong>, <strong>who controls the keys</strong>, <strong>can users exit</strong>, <strong>does it stay online</strong>, <strong>what is it used for</strong>, and <strong>what broke under stress</strong>. Every answer below is measured directly from public Bitcoin and Liquid block data — zero operator self-reporting.</p>
     </header>
 
-    <div class="callout callout-warn" role="note">
-      <div class="callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-      <div class="callout-body">
-        <strong>September–November 2026 Reserve Shortfall &amp; Redemption Halt Verified on Both Chains</strong>
-        <p>Between Sep 6 and Nov 2, 2026, Bitcoin reserves sat below L-BTC supply for <strong>57.32 days</strong> (trough: <strong>5.30%</strong> backing, −3,982.22 BTC), direct peg-out payouts stopped for <strong>59 days</strong>, and Liquid halted block production for <strong>79.2 hours</strong>. Backing returned to 100.15% on Nov 2 via fresh external inflows without a custody key rotation. <a href="incidents.html">Inspect the September 2026 Case Study &rarr;</a></p>
-      </div>
-    </div>
-
     <main>
-      <section class="section-block" aria-label="Headline audit metrics">
+      <section class="section-block" aria-label="Six L2 vital signs">
         <div class="kpi-grid kpi-grid-3" id="scorecard-kpis">
-          <div class="kpi-card accent-pass"><div class="kpi-label">Verified BTC Reserve</div><div class="kpi-value skeleton">&nbsp;</div></div>
-          <div class="kpi-card accent-gold"><div class="kpi-label">L-BTC Circulating Supply</div><div class="kpi-value skeleton">&nbsp;</div></div>
-          <div class="kpi-card accent-pass"><div class="kpi-label">Backing Ratio (Cutoff)</div><div class="kpi-value skeleton">&nbsp;</div></div>
-          <div class="kpi-card accent-danger"><div class="kpi-label">Historical Low Backing</div><div class="kpi-value skeleton">&nbsp;</div></div>
-          <div class="kpi-card accent-danger"><div class="kpi-label">Longest Redemption Halt</div><div class="kpi-value skeleton">&nbsp;</div></div>
-          <div class="kpi-card accent-cool"><div class="kpi-label">Custody Control</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-pass"><div class="kpi-label">1 · Solvency &amp; Backing</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-cool"><div class="kpi-label">2 · Custody &amp; Trust Model</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-gold"><div class="kpi-label">3 · Exit &amp; Redemption</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-pass"><div class="kpi-label">4 · 8-Year Network Liveness</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-primary"><div class="kpi-label">5 · Usage &amp; Privacy Cost</div><div class="kpi-value skeleton">&nbsp;</div></div>
+          <div class="kpi-card accent-primary"><div class="kpi-label">6 · Multi-Asset &amp; Stablecoins</div><div class="kpi-value skeleton">&nbsp;</div></div>
         </div>
       </section>
 
-      <section class="section-block">
+      <!-- ACT 2: THE 6 QUESTIONS EVERY L2 MUST ANSWER (PROMISES VS. 8-YEAR REALITY) -->
+      <section class="section-block" aria-label="Six core L2 audit questions">
         <div class="panel">
           <div class="panel-head">
             <div>
-              <h2 class="panel-title">Verified Bitcoin Reserve vs. L-BTC Supply (2018–2026)</h2>
-              <p class="panel-subtitle">Unspent federation custody UTXOs on Bitcoin L1 vs. cumulative peg-ins minus peg-outs and explicit burns on Liquid</p>
+              <h2 class="panel-title">The 6 Questions Every Bitcoin L2 Must Answer</h2>
+              <p class="panel-subtitle">Liquid's architectural promises tested across its entire 8-year history (2018–2026) on Bitcoin L1 and Liquid L2</p>
             </div>
             <div class="panel-controls">
-              <div class="btn-group" id="sc-range-btns" role="group" aria-label="Time range">
-                <button type="button" class="btn-seg active" data-range="all">All Time</button>
-                <button type="button" class="btn-seg" data-range="2026">2026</button>
-                <button type="button" class="btn-seg" data-range="incident">Aug–Nov 2026</button>
-              </div>
-              <a href="reserve.html" class="vbadge vbadge-l2" style="text-decoration:none;">Explore Reserves &rarr;</a>
+              <a href="methods.html" class="vbadge vbadge-cross" style="text-decoration:none;"><i class="fa-solid fa-check"></i> 78/78 Invariants Pass</a>
             </div>
           </div>
-          <div class="chart-canvas chart-tall" id="chart-scorecard-backing">
-            <div class="skeleton" style="width:100%;height:100%;"></div>
-          </div>
+          <div class="qa-grid" id="l2-questions-grid"></div>
         </div>
       </section>
 
-      <section class="section-block" aria-label="Audit pillars">
-        <div class="pillar-grid" id="scorecard-pillars"></div>
-      </section>
-
-      <section class="section-block">
+      <!-- ACT 3: EIGHT YEARS IN TWO CHARTS (SOLVENCY + ACTIVITY/FLOWS/UPTIME) -->
+      <section class="panel-grid" aria-label="Eight-year empirical charts">
         <div class="panel">
           <div class="panel-head">
             <div>
-              <h2 class="panel-title">Complete Audit Scorecard (26 Cross-Chain Metrics)</h2>
-              <p class="panel-subtitle">Direct output of <span class="mono">common/scorecard.parquet</span> in <span class="mono">l2-data v0.1.1</span> — every metric carries its verification class and source table</p>
+              <h2 class="panel-title">1. Solvency Over 8 Years: BTC Reserve vs. L-BTC Supply</h2>
+              <p class="panel-subtitle">Unspent Bitcoin federation UTXOs vs. Liquid net circulating supply (2018–2026)</p>
+            </div>
+            <div class="panel-controls">
+              <div class="btn-group" id="sc-range-btns" role="group" aria-label="Reserve time range">
+                <button type="button" class="btn-seg active" data-range="all">8 Years</button>
+                <button type="button" class="btn-seg" data-range="2026">2026</button>
+                <button type="button" class="btn-seg" data-range="incident">Aug–Nov '26</button>
+              </div>
             </div>
           </div>
-          <div tabindex="0" role="region" aria-label="Complete Audit Scorecard" class="table-wrapper">
-            <table class="data-table" id="table-scorecard">
-              <caption>Complete 26-metric Liquid Network scorecard</caption>
-              <thead>
-                <tr>
-                  <th scope="col" data-type="text">Metric</th>
-                  <th scope="col" data-type="text">Window</th>
-                  <th scope="col" data-type="text" class="num">Measured Value</th>
-                  <th scope="col" data-type="text">Verification</th>
-                  <th scope="col" data-type="text">Description</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+          <div class="chart-canvas" id="chart-scorecard-backing">
+            <div class="skeleton" style="width:100%;height:100%;"></div>
           </div>
+          <div class="chart-takeaway" id="takeaway-solvency"></div>
         </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title" id="chart-life-title">2. Network Life Over 8 Years: Activity &amp; Privacy</h2>
+              <p class="panel-subtitle" id="chart-life-sub">Monthly non-coinbase transactions and % fully confidential (2018–2026)</p>
+            </div>
+            <div class="panel-controls">
+              <div class="btn-group" id="sc-life-btns" role="group" aria-label="Network metric view">
+                <button type="button" class="btn-seg active" data-view="activity">Activity &amp; CT</button>
+                <button type="button" class="btn-seg" data-view="flows">Peg Flows</button>
+                <button type="button" class="btn-seg" data-view="uptime">Uptime</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-canvas" id="chart-scorecard-life">
+            <div class="skeleton" style="width:100%;height:100%;"></div>
+          </div>
+          <div class="chart-takeaway" id="takeaway-life"></div>
+        </div>
+      </section>
+
+      <!-- ACT 4: EIGHT-YEAR STRESS TEST & RESILIENCE RECORD (BALANCED ACROSS HISTORY) -->
+      <section class="section-block" aria-label="Eight-year stress tests">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">8-Year Resilience Record: Three Structural Stress Events (2018–2026)</h2>
+              <p class="panel-subtitle">Beyond day-to-day averages, an L2 is defined by how its custody, governance, and exits behave under failure</p>
+            </div>
+            <div class="panel-controls">
+              <a href="incidents.html" class="vbadge vbadge-l2" style="text-decoration:none;">Full 20-Incident Register &rarr;</a>
+            </div>
+          </div>
+          <div class="stress-grid" id="stress-events-grid"></div>
+        </div>
+      </section>
+
+      <!-- ACT 5: MULTI-L2 CONTEXT (LIQUID VS. LIGHTNING + ARK/SPARK) -->
+      <section class="section-block" aria-label="Cross-L2 context">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Where Liquid Fits in the Bitcoin L2 Landscape</h2>
+              <p class="panel-subtitle">Comparing custody, unilateral exit, and verifiable L1 Bitcoin locked across Bitcoin Data Labs' open datasets</p>
+            </div>
+            <div class="panel-controls">
+              <a href="compare.html" class="vbadge vbadge-btc" style="text-decoration:none;">Full L2 Comparison &rarr;</a>
+            </div>
+          </div>
+          <div class="compare-strip" id="scorecard-compare-strip"></div>
+        </div>
+      </section>
+
+      <!-- ACT 6: COMPLETE AUDIT SCORECARD REFERENCE (COLLAPSIBLE / HUMAN-READABLE) -->
+      <section class="section-block" aria-label="Complete metric reference">
+        <details class="panel details-panel" id="scorecard-details">
+          <summary class="details-summary">
+            <div>
+              <h2 class="panel-title" style="display:inline;">Complete Cross-Chain Metric Reference (26 Audited Indicators)</h2>
+              <p class="panel-subtitle">Direct output of <span class="mono">common/scorecard.parquet</span> in <span class="mono">l2-data v0.1.1</span> with verification classes — expand to inspect or sort every underlying figure</p>
+            </div>
+            <span class="vbadge vbadge-neutral details-toggle-pill">Expand Table <i class="fa-solid fa-chevron-down"></i></span>
+          </summary>
+          <div style="margin-top:16px;">
+            <div tabindex="0" role="region" aria-label="Complete Audit Scorecard" class="table-wrapper">
+              <table class="data-table" id="table-scorecard">
+                <caption>Complete 26-metric Liquid Network scorecard</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-type="text">Indicator</th>
+                    <th scope="col" data-type="text">Window</th>
+                    <th scope="col" data-type="text" class="num">Measured Value</th>
+                    <th scope="col" data-type="text">Verification</th>
+                    <th scope="col" data-type="text">What It Measures</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </details>
       </section>
     </main>
 
